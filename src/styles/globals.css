@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Google Font (Inter) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* Base HTML + Body */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #FAFAFA;
+  color: #111;
+}
+
+/* Animations */
+.fade-in { animation: fadeIn 0.4s ease-in-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.8s ease-out; }
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slideLeft { animation: slideLeft 0.25s ease-out; }
+
+/* Form Field */
+.form-field {
+  background-color: #F5F5F5;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 14px;
+}
+
+.form-field:focus {
+  outline: none;
+  border-color: #F38B14;
+  box-shadow: 0 0 0 1px #F38B14;
+}

@@ -1,0 +1,29 @@
+# node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# expo
+.expo/
+.expo-shared/
+
+# android / ios build
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/build/
+
+# env
+.env
+.env.*
+
+# misc
+.DS_Store
+*.log
+node_modules
+package-lock.json
+postcss.config.js
+index.html
+root folders.docx
+.idea
+

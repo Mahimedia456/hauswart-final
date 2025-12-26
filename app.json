@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "70feab54-beac-4161-ae19-72eca1c10c45"
+      }
+    },
+    "android": {
+      "package": "com.aamirali422.hauswartportal"
+    }
+  }
+}
