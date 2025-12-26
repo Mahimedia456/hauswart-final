@@ -1,0 +1,60 @@
+{
+  "expo": {
+    "name": "Hauswart-MMS",
+    "slug": "hauswart-mms",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "newArchEnabled": true,
+
+    "scheme": "hauswart-mms",
+    "userInterfaceStyle": "automatic",
+
+    /* ================= GLOBAL ICON ================= */
+    "icon": "./assets/images/icon.png",
+
+    /* ================= ANDROID ================= */
+    "android": {
+      "package": "com.anonymous.hauswartmms",
+
+      "icon": "./assets/android/ic_launcher.png",
+
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android/ic_launcher_foreground.png",
+        "backgroundColor": "#000000"
+      },
+
+      "roundIcon": "./assets/android/ic_launcher_round.png",
+
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+
+    /* ================= IOS ================= */
+    "ios": {
+      "bundleIdentifier": "com.anonymous.hauswartmms",
+      "supportsTablet": true,
+
+      /* Expo will derive all sizes from this */
+      "icon": "./assets/images/icon.png",
+
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+
+    /* ================= WEB ================= */
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+
+    /* ================= ROUTER ================= */
+    "plugins": ["expo-router"],
+
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c3d552c6-1256-40e9-a142-6564317ca309"
+      }
+    }
+  }
+}
