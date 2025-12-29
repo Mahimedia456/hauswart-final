@@ -1,12 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 
-import PropertiesList from "../pages/Properties/PropertiesList";
-import PropertyCreate from "../pages/Properties/PropertyCreate";
-import PropertyEdit from "../pages/Properties/PropertyEdit";
-import PropertyDelete from "../pages/Properties/PropertyDelete";
-import PropertyDetails from "../pages/Properties/PropertyDetails";
-
 import {
+  PropertiesList,
+  PropertyCreate,
+  PropertyEdit,
+  PropertyDelete,
+  PropertyDetails,
   PropOverview,
   PropDetailsTab,
   PropStructure,

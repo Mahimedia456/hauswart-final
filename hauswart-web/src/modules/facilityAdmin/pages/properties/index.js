@@ -1,5 +1,9 @@
+// src/modules/facilityAdmin/pages/properties/index.js
+
 export { default as PropertiesList } from "./PropertiesList";
 export { default as PropertyCreate } from "./PropertyCreate";
+export { default as PropertyEdit } from "./PropertyEdit";
+export { default as PropertyDelete } from "./PropertyDelete";
 export { default as PropertyDetails } from "./PropertyDetails";
 
 /* PROPERTY TABS */

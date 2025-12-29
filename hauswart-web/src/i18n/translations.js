@@ -3423,6 +3423,14 @@ task_status_in_progress: "In Progress",
 task_status_on_hold: "On Hold",
 task_status_completed: "Completed",
 
+tasks: "Tasks",
+task_hold: "Put on Hold",
+task_complete: "Mark Completed",
+
+task_status_pending: "Pending",
+task_status_in_progress: "In Progress",
+task_status_on_hold: "On Hold",
+task_status_completed: "Completed",
 
 
 
@@ -7051,6 +7059,14 @@ task_status_in_progress: "In Bearbeitung",
 task_status_on_hold: "Pausiert",
 task_status_completed: "Abgeschlossen",
 
+tasks: "Aufgaben",
+task_hold: "Pausieren",
+task_complete: "Als abgeschlossen markieren",
+
+task_status_pending: "Ausstehend",
+task_status_in_progress: "In Bearbeitung",
+task_status_on_hold: "Pausiert",
+task_status_completed: "Abgeschlossen",
 
 
 
