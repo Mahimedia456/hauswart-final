@@ -39,7 +39,7 @@ export default function Login() {
       password === "123123123"
     ) {
       login("dummy-token", "FACILITY_MANAGER");
-      navigate("/facility-admin", { replace: true });
+navigate("/facility-manager", { replace: true });
       return;
     }
 

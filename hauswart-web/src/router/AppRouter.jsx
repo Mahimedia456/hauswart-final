@@ -107,6 +107,9 @@ import TicketCreate from "@/modules/superAdmin/pages/Tickets/TicketCreate";
 import EditTicket from "@/modules/superAdmin/pages/Tickets/EditTicket";
 import TicketDetail from "@/modules/superAdmin/pages/Tickets/TicketDetail";
 
+// Facility Manager
+import FacilityManagerRoutes from "../modules/facilityAdmin/routes/FacilityManagerRoutes";
+
 /* ===================== */
 /* ROUTER */
 export default function AppRouter() {
@@ -135,7 +138,10 @@ export default function AppRouter() {
               <SuperAdminLayout />
             </ProtectedRoute>
           }
-        >
+        > 
+
+      {/* FALLBACK */}
+      <Route path="*" element={<Login />} />
           <Route index element={<SaDashboard />} />
 
           {/* PROFILE + NOTIFICATIONS */}
@@ -234,6 +240,9 @@ export default function AppRouter() {
 
           <Route path="tenants/:id/edit" element={<EditTenant />} />
         </Route>
+        <Route path="/facility-manager/*" element={<FacilityManagerRoutes />} />
+      
+
       </Route>
     </Routes>
   );

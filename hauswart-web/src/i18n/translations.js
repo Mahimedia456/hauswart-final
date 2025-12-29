@@ -3377,6 +3377,227 @@ date: "Date",
   march: "March",
 
 
+  facilityManager: "Facility Manager",
+  tasks: "Tasks",
+  approvals: "Approvals",
+  reports: "Reports",
+  technicians: "Technicians",
+  tenants: "Tenants",
+  fm_dash_title: "Dashboard",
+fm_dash_subtitle: "Overview of your properties and operations",
+fm_dash_properties: "Properties",
+fm_dash_openTasks: "Open Tasks",
+fm_dash_technicians: "Technicians",
+fm_dash_pendingApprovals: "Pending Approvals",
+fm_dash_taskTrend: "Task Trend",
+fm_dash_completionRate: "Completion Rate",
+fm_dash_completed: "Completed",
+fm_dash_completedTasks: "Completed Tasks",
+fm_dash_attention: "Needs Attention",
+fm_dash_alert_overdueTasks: "Some tasks are overdue",
+fm_dash_alert_pendingApprovals: "Tasks are waiting for approval",
+fm_activity_taskCompleted: "Task marked as completed",
+fm_activity_taskAssigned: "Task assigned to technician",
+fm_activity_issueReported: "Tenant reported an issue",
+fm_dash_recentTasks: "Recent Tasks",
+fm_dash_recentIssues: "Recent Tenant Issues",
+
+
+ticket_tasks: "Tasks",
+ticket_tasks_subtitle: "Tasks created and assigned for this ticket",
+ticket_create_task: "Create Task",
+
+ticket_no_tasks: "No tasks have been created for this ticket yet.",
+ticket_tasks_note: "Each task has its own lifecycle, QR code, and technician activity tracking.",
+
+col_task_id: "Task ID",
+col_technician: "Technician",
+col_status: "Status",
+col_started_at: "Started At",
+col_duration: "Duration",
+col_actions: "Actions",
+
+task_status_unassigned: "Unassigned",
+task_status_pending: "Pending",
+task_status_in_progress: "In Progress",
+task_status_on_hold: "On Hold",
+task_status_completed: "Completed",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6783,9 +7004,52 @@ date: "Datum",
   march: "März",
 
 
+facilityManager: "Facility Manager",
+  tasks: "Aufgaben",
+  approvals: "Freigaben",
+  reports: "Berichte",
+  technicians: "Techniker",
+  tenants: "Mieter",
+  fm_dash_title: "Dashboard",
+fm_dash_subtitle: "Übersicht über Ihre Immobilien und Vorgänge",
+fm_dash_properties: "Immobilien",
+fm_dash_openTasks: "Offene Aufgaben",
+fm_dash_technicians: "Techniker",
+fm_dash_pendingApprovals: "Ausstehende Freigaben",
+fm_dash_taskTrend: "Aufgabenverlauf",
+fm_dash_completionRate: "Erledigungsquote",
+fm_dash_completed: "Abgeschlossen",
+fm_dash_completedTasks: "Abgeschlossene Aufgaben",
+fm_dash_attention: "Handlungsbedarf",
+fm_dash_alert_overdueTasks: "Einige Aufgaben sind überfällig",
+fm_dash_alert_pendingApprovals: "Aufgaben warten auf Freigabe",
+fm_activity_taskCompleted: "Aufgabe als abgeschlossen markiert",
+fm_activity_taskAssigned: "Aufgabe einem Techniker zugewiesen",
+fm_activity_issueReported: "Mieter hat ein Problem gemeldet",
+fm_dash_recentTasks: "Letzte Aufgaben",
+fm_dash_recentIssues: "Letzte Mieteranfragen",
 
 
+ticket_tasks: "Aufgaben",
+ticket_tasks_subtitle: "Für dieses Ticket erstellte und zugewiesene Aufgaben",
+ticket_create_task: "Aufgabe erstellen",
 
+ticket_no_tasks: "Für dieses Ticket wurden noch keine Aufgaben erstellt.",
+ticket_tasks_note:
+  "Jede Aufgabe hat ihren eigenen Lebenszyklus, QR-Code und Aktivitätsverfolgung des Technikers.",
+
+col_task_id: "Aufgaben-ID",
+col_technician: "Techniker",
+col_status: "Status",
+col_started_at: "Gestartet am",
+col_duration: "Dauer",
+col_actions: "Aktionen",
+
+task_status_unassigned: "Nicht zugewiesen",
+task_status_pending: "Ausstehend",
+task_status_in_progress: "In Bearbeitung",
+task_status_on_hold: "Pausiert",
+task_status_completed: "Abgeschlossen",
 
 
 
@@ -6794,4 +7058,10 @@ date: "Datum",
 
 
   },
+
+
+
+
 };
+
+
