@@ -23,7 +23,5 @@ ios/build/
 node_modules
 package-lock.json
 postcss.config.js
-index.html
 root folders.docx
 .idea
-
