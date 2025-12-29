@@ -4,13 +4,11 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-
   resolve: {
     alias: {
       "@": path.resolve(process.cwd(), "src"),
     },
   },
-
   build: {
     rollupOptions: {
       input: path.resolve(process.cwd(), "index.html"),
