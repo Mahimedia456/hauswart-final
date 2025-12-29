@@ -75,10 +75,40 @@ import TechnicianOffboarding from "@/modules/superAdmin/pages/Technician/tabs/Of
 /* ===================== */
 import NotificationsList from "@/modules/notifications/pages/NotificationsList";
 import SuperAdminProfile from "../modules/superAdmin/pages/Profile/Profile";
+/* ===================== */
+/* PROPERTIES */
+/* ===================== */
+import PropertiesList from "@/modules/superAdmin/pages/Properties/PropertiesList";
+import PropertyCreate from "@/modules/superAdmin/pages/Properties/PropertyCreate";
+import PropertyDetails from "@/modules/superAdmin/pages/Properties/PropertyDetails";
+import {
+  PropOverview,
+  PropDetailsTab,
+  PropStructure,
+  PropAssets,
+  PropMaintenance,
+  PropTickets,
+  PropStaff,
+  PropGPSLogs,
+  PropActivity,
+} from "@/modules/superAdmin/pages/Properties";
+import PropertyEdit from "@/modules/superAdmin/pages/Properties/PropertyEdit";
+
+import {
+  TicketOverview,
+  TicketDetailTab,
+  TicketChatHub,
+} from "@/modules/superAdmin/pages/Tickets";
+/* ===================== */
+/* TICKETS */
+/* ===================== */
+import TicketsList from "@/modules/superAdmin/pages/Tickets/TicketsList";
+import TicketCreate from "@/modules/superAdmin/pages/Tickets/TicketCreate";
+import EditTicket from "@/modules/superAdmin/pages/Tickets/EditTicket";
+import TicketDetail from "@/modules/superAdmin/pages/Tickets/TicketDetail";
 
 /* ===================== */
 /* ROUTER */
-/* ===================== */
 export default function AppRouter() {
   return (
     <Routes>
@@ -108,10 +138,49 @@ export default function AppRouter() {
         >
           <Route index element={<SaDashboard />} />
 
+          {/* PROFILE + NOTIFICATIONS */}
           <Route path="profile" element={<SuperAdminProfile />} />
           <Route path="notifications" element={<NotificationsList />} />
 
-          {/* FACILITY MANAGERS */}
+          {/* ================= PROPERTIES ================= */}
+    
+<Route path="properties">
+  <Route index element={<PropertiesList />} />
+  <Route path="create" element={<PropertyCreate />} />
+  <Route path=":id/edit" element={<PropertyEdit />} />   {/* ✅ ADD */}
+
+
+  <Route path=":id" element={<PropertyDetails />}>
+    <Route index element={<PropOverview />} />
+    <Route path="overview" element={<PropOverview />} />
+    <Route path="details" element={<PropDetailsTab />} />
+    <Route path="structure" element={<PropStructure />} />
+    <Route path="assets" element={<PropAssets />} />
+    <Route path="maintenance" element={<PropMaintenance />} />
+    <Route path="tickets" element={<PropTickets />} />
+    <Route path="staff" element={<PropStaff />} />
+    <Route path="gps" element={<PropGPSLogs />} />
+    <Route path="activity" element={<PropActivity />} />
+  </Route>
+
+
+
+          </Route>
+
+          {/* ================= TICKETS ================= */}
+<Route path="tickets">
+  <Route index element={<TicketsList />} />
+  <Route path="create" element={<TicketCreate />} />
+  <Route path=":id/edit" element={<EditTicket />} />
+  <Route path=":id" element={<TicketDetail />}>
+    <Route index element={<TicketOverview />} />
+    <Route path="overview" element={<TicketOverview />} />
+    <Route path="details" element={<TicketDetailTab />} />
+    <Route path="chat" element={<TicketChatHub />} />
+  </Route>
+</Route>
+
+          {/* ================= FACILITY MANAGERS ================= */}
           <Route path="facility-managers" element={<FacilityManagersList />} />
           <Route path="facility-managers/create" element={<FacilityManagerCreate />} />
 
@@ -127,19 +196,16 @@ export default function AppRouter() {
           <Route path="facility-managers/:id/edit" element={<FacilityManagerEdit />} />
           <Route path="facility-managers/:id/delete" element={<FacilityManagerDelete />} />
 
-          {/* BILLING */}
+          {/* ================= BILLING ================= */}
           <Route path="billing/subscriptions" element={<BillingSubscriptions />} />
           <Route path="billing/subscriptions/:id" element={<SubscriptionDetail />} />
-
           <Route path="billing/invoices" element={<BillingInvoices />} />
           <Route path="billing/invoices/:id" element={<InvoiceDetail />} />
 
-          {/* TECHNICIANS */}
+          {/* ================= TECHNICIANS ================= */}
           <Route path="technicians">
             <Route index element={<TechniciansList />} />
             <Route path="create" element={<TechnicianCreate />} />
-            <Route path=":id/edit" element={<TechnicianEdit />} />
-            <Route path=":id/delete" element={<DeleteTechnician />} />
 
             <Route path=":id" element={<TechnicianDetail />}>
               <Route index element={<TechnicianOverview />} />
@@ -149,9 +215,12 @@ export default function AppRouter() {
               <Route path="tickets" element={<TechnicianTasks />} />
               <Route path="offboarding" element={<TechnicianOffboarding />} />
             </Route>
+
+            <Route path=":id/edit" element={<TechnicianEdit />} />
+            <Route path=":id/delete" element={<DeleteTechnician />} />
           </Route>
 
-          {/* TENANTS */}
+          {/* ================= TENANTS ================= */}
           <Route path="tenants" element={<TenantsList />} />
           <Route path="tenants/create" element={<AddTenant />} />
 

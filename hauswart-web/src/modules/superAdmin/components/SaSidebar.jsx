@@ -78,21 +78,19 @@ export default function SaSidebar() {
           />
         </SidebarSection>
 
-        {/* TICKETS */}
-        <SidebarSection label={dict.tickets}>
-         
-          <SidebarItem
-            to="/super-admin/tickets/all"
-            icon="list"
-            label={dict.ticketsAll}
-          />
-          <SidebarItem
-            to="/super-admin/tickets/create"
-            icon="add"
-            label={dict.ticketCreate}
-          />
-        </SidebarSection>
-
+       {/* TICKETS */}
+<SidebarSection label={dict.tickets}>
+  <SidebarItem
+    to="/super-admin/tickets"
+    icon="list"
+    label={dict.ticketsAll}
+  />
+  <SidebarItem
+    to="/super-admin/tickets/create"
+    icon="add"
+    label={dict.ticketCreate}
+  />
+</SidebarSection>
         {/* BILLING */}
 <SidebarSection label={dict.billing || "Billing"}>
   <SidebarItem

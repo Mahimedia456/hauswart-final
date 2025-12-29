@@ -2,7 +2,7 @@ import { useState } from "react";
 import ActivityDetailsDrawer from "../components/ActivityDetailsDrawer"; 
 // <-- Your required import path
 
-export default function ActivityLogs() {
+export default function PropActivity() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedLog, setSelectedLog] = useState(null);
 

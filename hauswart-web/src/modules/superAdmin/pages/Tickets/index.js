@@ -1,6 +1,7 @@
-export { default as TicketList } from "./TicketList";
+export { default as TicketList } from "./TicketsList";
 export { default as TicketCreate } from "./TicketCreate";
 export { default as TicketDetail } from "./TicketDetail";
+export { default as EditTicket } from "./EditTicket";
 export { default as TicketConversation } from "./TicketConversation";
 
 /* Tabs */
