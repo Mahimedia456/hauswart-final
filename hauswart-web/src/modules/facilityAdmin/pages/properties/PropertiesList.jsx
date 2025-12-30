@@ -1,11 +1,18 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../../context/LanguageContext";
 import { t } from "../../../../i18n/translations";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-/* ---------------- DUMMY DATA ---------------- */
+/* ---------------- KPI DATA ---------------- */
+const stats = [
+  { labelKey: "properties_total", value: "128", icon: "apartment" },
+  { labelKey: "properties_active", value: "114", icon: "check_circle" },
+  { labelKey: "properties_archived", value: "14", icon: "archive" },
+  { labelKey: "properties_units", value: "3,420", icon: "home_work" },
+];
 
-const DUMMY_PROPERTIES = [
+/* ---------------- TABLE DATA ---------------- */
+const properties = [
   {
     id: "prop-1",
     name: "Hauswart Tower",
@@ -14,8 +21,7 @@ const DUMMY_PROPERTIES = [
     floors: 45,
     units: 320,
     fm: "Elena Rodriguez",
-    status: "Active",
-    statusTone: "green",
+    status: "active",
     created: "2025-03-12",
   },
   {
@@ -26,239 +32,199 @@ const DUMMY_PROPERTIES = [
     floors: 12,
     units: 84,
     fm: "Marcus Chen",
-    status: "Active",
-    statusTone: "green",
+    status: "active",
     created: "2025-03-10",
   },
   {
     id: "prop-3",
-    name: "Oakridge Industrial Park",
-    organization: "First National REIT",
-    type: "Industrial",
-    floors: 3,
-    units: 15,
-    fm: "Sarah Jenkins",
-    status: "Active",
-    statusTone: "green",
-    created: "2025-03-05",
-  },
-  {
-    id: "prop-4",
     name: "The Grand Plaza",
     organization: "Global Holdings Inc.",
     type: "Mixed Use",
     floors: 25,
     units: 150,
     fm: "Aisha Khan",
-    status: "Archived",
-    statusTone: "gray",
+    status: "archived",
     created: "2025-02-28",
   },
 ];
 
 export default function PropertiesList() {
-  const navigate = useNavigate();
   const { lang } = useLanguage();
   const dict = t[lang];
+  const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
+  const [deleteProperty, setDeleteProperty] = useState(null);
 
-  const filtered = DUMMY_PROPERTIES.filter((p) =>
-    p.name.toLowerCase().includes(search.toLowerCase())
+  return (
+    <div className="space-y-6">
+
+      {/* ================= HEADER ================= */}
+      <header className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold">{dict.properties}</h1>
+          <p className="text-slate-500">{dict.properties_subtitle}</p>
+        </div>
+
+        <div className="flex gap-3">
+          <button className="h-10 px-4 rounded-lg border border-slate-200 font-bold">
+            {dict.export_list}
+          </button>
+
+          <button
+            onClick={() => navigate("create")}
+            className="h-10 px-4 rounded-lg bg-[#F38B14] text-white font-bold hover:bg-black transition"
+          >
+            <span className="material-symbols-outlined text-sm mr-1">add</span>
+            {dict.createProperty}
+          </button>
+        </div>
+      </header>
+
+      {/* ================= KPI CARDS ================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((s) => (
+          <div
+            key={s.labelKey}
+            className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm"
+          >
+            <div className="flex justify-between text-slate-500">
+              <p className="font-medium">{dict[s.labelKey]}</p>
+              <span className="material-symbols-outlined">{s.icon}</span>
+            </div>
+            <p className="text-3xl font-bold mt-2">{s.value}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* ================= TABLE ================= */}
+      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-slate-50 text-slate-600 uppercase text-xs">
+            <tr>
+              <th className="px-6 py-3 text-left">{dict.col_propertyName}</th>
+              <th className="px-6 py-3 text-left">{dict.organization}</th>
+              <th className="px-6 py-3 text-left">{dict.col_type}</th>
+              <th className="px-6 py-3 text-left">{dict.col_floorsUnits}</th>
+              <th className="px-6 py-3 text-left">{dict.col_facilityManager}</th>
+              <th className="px-6 py-3 text-left">{dict.col_status}</th>
+              <th className="px-6 py-3 text-left">{dict.col_createdDate}</th>
+              <th className="px-6 py-3 text-right">{dict.actions}</th>
+            </tr>
+          </thead>
+
+          <tbody className="divide-y divide-slate-200">
+            {properties.map((p) => (
+              <tr
+                key={p.id}
+                className="hover:bg-slate-50 cursor-pointer"
+                onClick={() => navigate(p.id)}
+              >
+                <td className="px-6 py-4 font-medium text-slate-900">
+                  {p.name}
+                </td>
+                <td className="px-6 py-4">{p.organization}</td>
+                <td className="px-6 py-4">{p.type}</td>
+                <td className="px-6 py-4">
+                  {p.floors} {dict.label_floors} / {p.units} {dict.label_units}
+                </td>
+                <td className="px-6 py-4">{p.fm}</td>
+                <td className="px-6 py-4">
+                  <StatusBadge status={p.status} />
+                </td>
+                <td className="px-6 py-4">{p.created}</td>
+
+                {/* ACTIONS */}
+                <td
+                  className="px-6 py-4 text-right space-x-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <IconButton
+                    icon="visibility"
+                    onClick={() => navigate(p.id)}
+                  />
+                  <IconButton
+                    icon="edit"
+                    onClick={() => navigate(`${p.id}/edit`)}
+                  />
+                  <IconButton
+                    icon="delete"
+                    danger
+                    onClick={() => setDeleteProperty(p)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* ================= DELETE MODAL ================= */}
+      {deleteProperty && (
+        <DeleteModal
+          property={deleteProperty}
+          onClose={() => setDeleteProperty(null)}
+        />
+      )}
+    </div>
   );
+}
 
-  const tone = (t) => {
-    if (t === "green") return "bg-green-100 text-green-800";
-    if (t === "gray") return "bg-slate-200 text-slate-700";
-    return "bg-slate-100 text-slate-600";
+/* ================= SHARED UI ================= */
+
+function IconButton({ icon, onClick, danger }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`p-1 rounded hover:bg-slate-200 ${
+        danger ? "text-red-600" : "text-slate-600"
+      }`}
+    >
+      <span className="material-symbols-outlined text-[20px]">{icon}</span>
+    </button>
+  );
+}
+
+function StatusBadge({ status }) {
+  const map = {
+    active: "bg-green-100 text-green-700",
+    archived: "bg-slate-200 text-slate-600",
   };
 
   return (
-    <div className="space-y-8">
-      {/* HEADER */}
-      <header className="flex flex-wrap justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">
-            {dict.properties}
-          </h1>
-          <p className="text-slate-500 mt-1">
-            {dict.properties_subtitle}
-          </p>
-        </div>
-
-        {/* ✅ FIXED: Facility Manager create route */}
-        <button
-          onClick={() => navigate("create")}
-          className="inline-flex items-center gap-2 h-10 px-5 rounded-xl bg-[#F38B14] text-white text-sm font-semibold hover:bg-black transition"
-        >
-          <span className="material-symbols-outlined text-[18px]">add</span>
-          {dict.createProperty}
-        </button>
-      </header>
-
-      {/* FILTER BAR */}
-      <section className="bg-white/80 border border-slate-200 rounded-2xl shadow p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <Select>
-            <option>{dict.filter_org}</option>
-            <option>Global Holdings Inc.</option>
-            <option>GreenLeaf Properties</option>
-          </Select>
-
-          <Select>
-            <option>{dict.filter_propertyType}</option>
-            <option>{dict.type_residential}</option>
-            <option>{dict.type_commercial}</option>
-            <option>{dict.type_industrial}</option>
-            <option>{dict.type_mixed}</option>
-          </Select>
-
-          <Select>
-            <option>{dict.filter_assignedFM}</option>
-            <option>John Doe</option>
-            <option>Jane Smith</option>
-          </Select>
-
-          <Select>
-            <option>{dict.filter_status}</option>
-            <option>{dict.status_active}</option>
-            <option>{dict.status_archived}</option>
-          </Select>
-
-          <SearchInput
-            placeholder={dict.searchPropertyPlaceholder}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-      </section>
-
-      {/* TABLE */}
-      <section className="bg-white/80 border border-slate-200 rounded-2xl shadow overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-slate-50 text-slate-500 uppercase text-xs">
-              <tr>
-                <Th>{dict.col_propertyName}</Th>
-                <Th>{dict.col_organization}</Th>
-                <Th>{dict.col_type}</Th>
-                <Th>{dict.col_floorsUnits}</Th>
-                <Th>{dict.col_facilityManager}</Th>
-                <Th>{dict.col_status}</Th>
-                <Th>{dict.col_createdDate}</Th>
-                <Th right>{dict.col_actions}</Th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {filtered.length === 0 && (
-                <tr>
-                  <td colSpan={8} className="text-center text-slate-400 py-10">
-                    {dict.noProperties}
-                  </td>
-                </tr>
-              )}
-
-              {filtered.map((p, idx) => (
-                <tr
-                  key={p.id}
-                  className={`border-t hover:bg-orange-50/50 cursor-pointer ${
-                    idx % 2 ? "bg-slate-50/30" : "bg-white"
-                  }`}
-                  /* ✅ FIXED: RELATIVE NAVIGATION */
-                  onClick={() => navigate(p.id)}
-                >
-                  <Td strong>{p.name}</Td>
-                  <Td>{p.organization}</Td>
-                  <Td>
-                    <span className="px-3 py-1 text-xs rounded-full bg-slate-200">
-                      {p.type}
-                    </span>
-                  </Td>
-                  <Td>
-                    {p.floors} {dict.label_floors} / {p.units}{" "}
-                    {dict.label_units}
-                  </Td>
-                  <Td>{p.fm}</Td>
-                  <Td>
-                    <span
-                      className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${tone(
-                        p.statusTone
-                      )}`}
-                    >
-                      {p.status}
-                    </span>
-                  </Td>
-                  <Td>{p.created}</Td>
-                  <Td right>
-                    <button
-                      className="text-slate-500 hover:text-slate-900"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <span className="material-symbols-outlined">
-                        more_horiz
-                      </span>
-                    </button>
-                  </Td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-  );
-}
-
-/* ---------------- SHARED UI ---------------- */
-
-function Select({ children, ...props }) {
-  return (
-    <select
-      {...props}
-      className="w-full bg-slate-50 h-11 px-3 rounded-lg border border-slate-200 text-sm"
-    >
-      {children}
-    </select>
-  );
-}
-
-function SearchInput({ placeholder, value, onChange }) {
-  return (
-    <div className="relative">
-      <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-        search
-      </span>
-      <input
-        className="w-full bg-slate-50 h-11 pl-10 pr-3 rounded-lg border border-slate-200 text-sm"
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
-  );
-}
-
-function Th({ children, right }) {
-  return (
-    <th
-      className={`px-6 py-3 font-medium ${
-        right ? "text-right" : "text-left"
+    <span
+      className={`px-2 py-1 rounded-full text-xs font-semibold ${
+        map[status] || "bg-slate-100 text-slate-600"
       }`}
     >
-      {children}
-    </th>
+      {status}
+    </span>
   );
 }
 
-function Td({ children, strong, right }) {
+function DeleteModal({ property, onClose }) {
   return (
-    <td
-      className={`px-6 py-3 ${
-        strong ? "font-semibold text-slate-900" : "text-slate-700"
-      } ${right ? "text-right" : ""}`}
-    >
-      {children}
-    </td>
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
+      <div className="bg-white rounded-xl w-[420px] p-6 shadow-xl">
+        <h2 className="text-lg font-bold mb-2">
+          {`Delete Property`}
+        </h2>
+        <p className="text-slate-600 mb-6">
+          Are you sure you want to delete{" "}
+          <strong>{property.name}</strong>? This action cannot be undone.
+        </p>
+
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg border"
+          >
+            Cancel
+          </button>
+          <button className="px-4 py-2 rounded-lg bg-red-600 text-white font-bold">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

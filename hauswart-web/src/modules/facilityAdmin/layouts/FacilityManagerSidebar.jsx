@@ -21,7 +21,7 @@ export default function FacilityManagerSidebar() {
         overflow-hidden
       "
     >
-      {/* LOGO */}
+      {/* ================= LOGO ================= */}
       <div className="px-6 py-5 flex items-center gap-3 border-b border-slate-200">
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-[#F38B14] text-white">
           <span className="material-symbols-outlined text-[26px]">
@@ -33,7 +33,7 @@ export default function FacilityManagerSidebar() {
         </h1>
       </div>
 
-      {/* NAV */}
+      {/* ================= NAV ================= */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
 
         {/* DASHBOARD */}
@@ -42,6 +42,7 @@ export default function FacilityManagerSidebar() {
             to="/facility-manager"
             icon="dashboard"
             label={dict.dashboard}
+            end
           />
         </SidebarSection>
 
@@ -74,26 +75,28 @@ export default function FacilityManagerSidebar() {
             to="/facility-manager/tickets"
             icon="confirmation_number"
             label={dict.tickets}
+            end
           />
           <SidebarItem
             to="/facility-manager/tasks"
             icon="assignment"
             label={dict.tasks}
+            end
           />
         </SidebarSection>
 
-        {/* APPROVALS */}
+        {/* APPROVALS (DISABLED SAFELY) */}
         <SidebarSection label={dict.approvals}>
           <SidebarItem
-            to="/facility-manager/approvals"
             icon="task_alt"
             label={dict.approvals}
+            disabled
           />
         </SidebarSection>
 
       </nav>
 
-      {/* LOGOUT */}
+      {/* ================= LOGOUT ================= */}
       <div className="p-4 border-t border-slate-200">
         <button
           onClick={logout}
@@ -115,9 +118,9 @@ export default function FacilityManagerSidebar() {
   );
 }
 
-/* -------------------- */
-/* REUSABLE UI         */
-/* -------------------- */
+/* ================================================= */
+/* REUSABLE UI COMPONENTS                            */
+/* ================================================= */
 
 function SidebarSection({ label, children }) {
   return (
@@ -130,10 +133,27 @@ function SidebarSection({ label, children }) {
   );
 }
 
-function SidebarItem({ to, icon, label }) {
+function SidebarItem({ to, icon, label, end = false, disabled = false }) {
+  if (disabled) {
+    return (
+      <div
+        className="
+          flex items-center gap-3 px-3 py-2 rounded-xl
+          text-slate-400 opacity-60 cursor-not-allowed
+        "
+      >
+        <span className="material-symbols-outlined text-[20px]">
+          {icon}
+        </span>
+        <span>{label}</span>
+      </div>
+    );
+  }
+
   return (
     <NavLink
       to={to}
+      end={end}
       className={({ isActive }) =>
         `
         flex items-center gap-3 px-3 py-2 rounded-xl transition

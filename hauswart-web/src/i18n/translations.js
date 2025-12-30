@@ -3432,28 +3432,304 @@ task_status_in_progress: "In Progress",
 task_status_on_hold: "On Hold",
 task_status_completed: "Completed",
 
+task: "Task",
+tasks: "Tasks",
+create_task: "Create Task",
+task_title: "Task Title",
+task_description: "Description",
+task_priority: "Priority",
+assign_technician: "Assign Technician",
+task_hold: "Put on Hold",
+task_complete: "Mark Completed",
+
+
+task_description: "Beschreibung",
+location: "Standort",
+open_map: "In Karte öffnen",
+property: "Objekt",
+building_floor: "Gebäude / Etage",
+unit_area: "Einheit / Bereich",
+address: "Adresse",
+checklist: "Checkliste",
+assigned_technician: "Zugewiesener Techniker",
+change: "Ändern",
+on_duty: "Im Einsatz",
+assigned_at: "Zugewiesen am",
+task_timing: "Zeitplan",
+created_at: "Erstellt am",
+started_at: "Gestartet am",
+due_date: "Fälligkeitsdatum",
+sla_status: "SLA-Status",
+sla_risk: "Risiko",
+priority_rules: "Priorität & Regeln",
+priority: "Priorität",
+high: "Hoch",
+sla_level: "SLA-Stufe",
+auto_close: "Automatisches Schließen",
+disabled: "Deaktiviert",
+tenant_visible: "Für Mieter sichtbar",
+yes: "Ja",
+need_help: "Benötigen Sie Hilfe bei dieser Aufgabe?",
+view_sop: "SOP-Dokumentation anzeigen",
+emergency: "Notfall",
+hvac: "HLK",
+tenant_reported: "Vom Mieter gemeldet",
+
+activity_timeline: "Activity Timeline",
+today: "Today",
+yesterday: "Yesterday",
+photo_uploaded: "Photo Uploaded",
+status_update: "Status Update",
+manager_note: "Manager Note",
+task_created: "Task Created",
+changed_status_from: "Changed status from",
+task_generated_via: "Task generated automatically via",
+maintenance_schedule: "Maintenance Schedule",
+start_of_history: "Start of History",
+
+all: "All",
+system: "System",
+technician: "Technician",
+manager: "Manager",
+status_changes: "Status Changes",
+notes: "Notes",
+media: "Media",
+
+
+comments: "Comments",
+write_comment_placeholder: "Write a comment to @Technician...",
+send_comment: "Send Comment",
+add_attachment: "Add Attachment",
+add_image: "Add Image",
+add_emoji: "Add Emoji",
+enter_to_send: "Press Enter to send, Shift+Enter for new line",
+
+task_created_system: "Task created by System on Oct 24, 2023 at 08:30 AM",
+task_assigned_technician: "Task assigned to Technician Bob",
+
+facility_manager: "Facility Manager",
+technician: "Technician",
+
+two_hours_ago: "2 hours ago",
+one_hour_ago: "1 hour ago",
+just_now: "Just now",
+
+completion_summary: "Completion Summary",
+technician: "Technician",
+completed_at: "Completed At",
+duration: "Duration",
+assets: "Assets",
+
+technician_notes: "Technician Completion Notes",
+checklist_review: "Checklist Review",
+media_evidence: "Media & Evidence",
+before_work: "Before Work",
+after_work: "After Work",
+
+current_status: "Current Status",
+awaiting_approval: "Awaiting Approval",
+final_review: "Final Review",
+final_review_help:
+  "Review the technician’s notes, checklist, and evidence before approving.",
+auto_notification:
+  "Technician will be notified immediately after your decision.",
+
+approve_task: "Approve Task",
+reject_task: "Reject & Send Back",
+last_updated: "Last update by System • Today, 14:31",
+
+need_help: "Need more info?",
+message_technician: "Message Technician",
+
+assign_technician: "Techniker zuweisen",
+reassign_warning: "Diese Aufgabe ist derzeit zugewiesen an",
+task_context: "Aufgabenkontext",
+high_priority: "Hohe Priorität",
+select_technician: "Techniker auswählen",
+search_technician: "Techniker suchen...",
+active_tasks: "aktive Aufgaben",
+available: "Verfügbar",
+busy: "Ausgelastet",
+offline: "Offline",
+additional_note: "Zusätzliche Notiz",
+optional: "Optional",
+assign_note_placeholder: "Hinweise oder Zugangsinformationen für den Techniker...",
+notify_technician: "Techniker sofort benachrichtigen",
+notify_hint: "Der Techniker erhält eine E-Mail- und SMS-Benachrichtigung.",
+assign: "Zuweisen",
+cancel: "Abbrechen",
 
 
 
+change_task_status: "Change Task Status",
+current_status: "Current",
+new_status: "New Status",
+reason_for_change: "Reason for change",
+reason_placeholder: "Add reason for status change (required)",
+minimum_characters: "Minimum 5 characters required.",
+notify_technician_tenant: "Notify technician & tenant",
+update_status: "Update Status",
+
+status_todo: "To Do",
+status_in_progress: "In Progress",
+status_on_hold: "On Hold",
+status_completed: "Completed",
+status_cancelled: "Cancelled",
+approve_task: "Approve Task",
+reject_task: "Reject & Send Back",
+awaiting_approval: "Awaiting Approval",
+completion_summary: "Completion Summary",
+technician_notes: "Technician Notes",
 
 
 
+/* ================= PROPERTIES KPIs ================= */
+  properties_total: "Total Properties",
+  properties_active: "Active Properties",
+  properties_archived: "Archived Properties",
+  properties_units: "Total Units",
+
+  /* ================= PROPERTIES ================= */
+  properties: "Properties",
+  properties_subtitle: "Manage all properties under your responsibility",
+
+  /* ================= TABLE ================= */
+  col_propertyName: "Property Name",
+  col_type: "Type",
+  col_floorsUnits: "Floors / Units",
+  col_facilityManager: "Facility Manager",
+  col_createdDate: "Created Date",
+
+  /* ================= ACTIONS ================= */
+  createProperty: "Add Property",
 
 
+/* ================= TICKETS KPIs ================= */
+tickets_total: "Total Tickets",
+tickets_open: "Open Tickets",
+tickets_in_progress: "In Progress",
+tickets_overdue: "Overdue Tickets",
+
+/* ================= TICKETS ================= */
+tickets: "Tickets",
+tickets_subtitle: "Manage tickets across all organizations, properties, and technicians",
+
+createTicket: "Create Ticket",
+
+/* ================= TASKS ================= */
+
+tasks: "Tasks",
+tasks_subtitle: "Manage all maintenance tasks",
+
+create_task: "Create Task",
+
+/* KPIs */
+tasks_total: "Total Tasks",
+tasks_in_progress: "In Progress",
+tasks_completed: "Completed",
+tasks_overdue: "Overdue",
+
+/* Filters */
+filter_status: "Status",
+filter_priority: "Priority",
+filter_technician: "Technician",
+clear_all: "Clear All",
+
+/* Status */
+status_in_progress: "In Progress",
+status_completed: "Completed",
+status_pending: "Pending",
+status_on_hold: "On Hold",
+status_cancelled: "Cancelled",
+
+/* Priority */
+priority_high: "High",
+priority_medium: "Medium",
+priority_low: "Low",
+
+/* Table */
+col_task_id: "Task ID",
+col_technician: "Technician",
+col_status: "Status",
+col_actions: "Actions",
+
+/* Empty states */
+no_tasks: "No tasks found",
 
 
+task_create_title: "Create Task",
+task_edit_title: "Edit Task",
+task_create_subtitle: "Define task details and assignment",
+
+task_section_context: "Task Context",
+task_section_details: "Task Details",
+task_section_schedule: "Priority & Scheduling",
+task_section_assignment: "Assignment",
+
+task_property: "Property",
+task_unit: "Unit",
+task_title: "Task Title",
+task_description: "Description",
+task_due_date: "Due Date",
+task_priority: "Priority",
+task_assign_technician: "Assign Technician",
+
+priority_high: "High",
+priority_medium: "Medium",
+priority_low: "Low",
+
+select_technician: "Select technician",
+
+btn_create_task: "Create Task",
+btn_save_changes: "Save Changes",
+btn_cancel: "Cancel",
 
 
+assign_task_title: "Assign Task",
+assign_task_subtitle: "Select a technician and notify them",
 
+reassign_warning: "This task is currently assigned to",
+task_context: "Task Context",
 
+select_technician: "Select Technician",
+search_technician: "Search technician",
 
+active_tasks: "active tasks",
+available: "Available",
+busy: "Busy",
+offline: "Offline",
 
+additional_note: "Additional Note",
+assign_note_placeholder: "Add a message for the technician…",
+optional: "Optional",
 
+notify_technician: "Notify technician",
+notify_hint: "Send a notification about this assignment",
 
+btn_assign: "Assign",
+btn_cancel: "Cancel",
 
+update_task_status_title: "Update Task Status",
+update_task_status_subtitle: "Change the current status of this task",
 
+new_status: "New Status",
+current_status: "Current Status",
 
+status_todo: "To Do",
+status_in_progress: "In Progress",
+status_on_hold: "On Hold",
+status_completed: "Completed",
+status_cancelled: "Cancelled",
 
+reason_for_change: "Reason for change",
+reason_placeholder: "Explain why this status is being changed…",
+reason_min_chars: "Minimum 5 characters required",
+
+notify_users: "Notify relevant users",
+notify_users_hint: "Send notification to assigned technician and tenant",
+
+btn_update_status: "Update Status",
+btn_cancel: "Cancel",
 
 
 
@@ -7067,6 +7343,307 @@ task_status_pending: "Ausstehend",
 task_status_in_progress: "In Bearbeitung",
 task_status_on_hold: "Pausiert",
 task_status_completed: "Abgeschlossen",
+
+
+task: "Aufgabe",
+tasks: "Aufgaben",
+create_task: "Aufgabe erstellen",
+task_title: "Aufgabentitel",
+task_description: "Beschreibung",
+task_priority: "Priorität",
+assign_technician: "Techniker zuweisen",
+task_hold: "Pausieren",
+task_complete: "Als abgeschlossen markieren",
+
+task_description: "Beschreibung",
+location: "Standort",
+open_map: "In Karte öffnen",
+property: "Objekt",
+building_floor: "Gebäude / Etage",
+unit_area: "Einheit / Bereich",
+address: "Adresse",
+checklist: "Checkliste",
+assigned_technician: "Zugewiesener Techniker",
+change: "Ändern",
+on_duty: "Im Einsatz",
+assigned_at: "Zugewiesen am",
+task_timing: "Zeitplan",
+created_at: "Erstellt am",
+started_at: "Gestartet am",
+due_date: "Fälligkeitsdatum",
+sla_status: "SLA-Status",
+sla_risk: "Risiko",
+priority_rules: "Priorität & Regeln",
+priority: "Priorität",
+high: "Hoch",
+sla_level: "SLA-Stufe",
+auto_close: "Automatisches Schließen",
+disabled: "Deaktiviert",
+tenant_visible: "Für Mieter sichtbar",
+yes: "Ja",
+need_help: "Benötigen Sie Hilfe bei dieser Aufgabe?",
+view_sop: "SOP-Dokumentation anzeigen",
+emergency: "Notfall",
+hvac: "HLK",
+tenant_reported: "Vom Mieter gemeldet",
+
+
+activity_timeline: "Aktivitätsverlauf",
+today: "Heute",
+yesterday: "Gestern",
+photo_uploaded: "Foto hochgeladen",
+status_update: "Statusaktualisierung",
+manager_note: "Manager-Notiz",
+task_created: "Aufgabe erstellt",
+changed_status_from: "Status geändert von",
+task_generated_via: "Aufgabe automatisch erstellt über",
+maintenance_schedule: "Wartungsplan",
+start_of_history: "Beginn des Verlaufs",
+
+all: "Alle",
+system: "System",
+technician: "Techniker",
+manager: "Manager",
+status_changes: "Statusänderungen",
+notes: "Notizen",
+media: "Medien",
+
+
+
+comments: "Kommentare",
+write_comment_placeholder: "Kommentar an @Techniker schreiben...",
+send_comment: "Kommentar senden",
+add_attachment: "Anhang hinzufügen",
+add_image: "Bild hinzufügen",
+add_emoji: "Emoji hinzufügen",
+enter_to_send: "Enter zum Senden, Shift+Enter für neue Zeile",
+
+task_created_system: "Aufgabe wurde vom System am 24. Okt. 2023 um 08:30 erstellt",
+task_assigned_technician: "Aufgabe wurde Techniker Bob zugewiesen",
+
+facility_manager: "Facility Manager",
+technician: "Techniker",
+
+two_hours_ago: "vor 2 Stunden",
+one_hour_ago: "vor 1 Stunde",
+just_now: "Gerade eben",
+
+completion_summary: "Abschlussübersicht",
+technician: "Techniker",
+completed_at: "Abgeschlossen am",
+duration: "Dauer",
+assets: "Anlagen",
+
+technician_notes: "Abschlussnotizen des Technikers",
+checklist_review: "Checklistenprüfung",
+media_evidence: "Medien & Nachweise",
+before_work: "Vor der Arbeit",
+after_work: "Nach der Arbeit",
+
+current_status: "Aktueller Status",
+awaiting_approval: "Freigabe ausstehend",
+final_review: "Endprüfung",
+final_review_help:
+  "Bitte prüfen Sie Notizen, Checkliste und Medien vor der Freigabe.",
+auto_notification:
+  "Der Techniker wird sofort über Ihre Entscheidung informiert.",
+
+approve_task: "Aufgabe genehmigen",
+reject_task: "Ablehnen & zurücksenden",
+last_updated: "Letzte Aktualisierung durch System • Heute, 14:31",
+
+need_help: "Weitere Informationen benötigt?",
+message_technician: "Techniker kontaktieren",
+
+assign_technician: "Techniker zuweisen",
+reassign_warning: "Diese Aufgabe ist derzeit zugewiesen an",
+task_context: "Aufgabenkontext",
+high_priority: "Hohe Priorität",
+select_technician: "Techniker auswählen",
+search_technician: "Techniker suchen...",
+active_tasks: "aktive Aufgaben",
+available: "Verfügbar",
+busy: "Ausgelastet",
+offline: "Offline",
+additional_note: "Zusätzliche Notiz",
+optional: "Optional",
+assign_note_placeholder: "Hinweise oder Zugangsinformationen für den Techniker...",
+notify_technician: "Techniker sofort benachrichtigen",
+notify_hint: "Der Techniker erhält eine E-Mail- und SMS-Benachrichtigung.",
+assign: "Zuweisen",
+cancel: "Abbrechen",
+
+change_task_status: "Aufgabenstatus ändern",
+current_status: "Aktuell",
+new_status: "Neuer Status",
+reason_for_change: "Grund für die Änderung",
+reason_placeholder: "Grund für die Statusänderung angeben (erforderlich)",
+minimum_characters: "Mindestens 5 Zeichen erforderlich.",
+notify_technician_tenant: "Techniker & Mieter benachrichtigen",
+update_status: "Status aktualisieren",
+
+status_todo: "Offen",
+status_in_progress: "In Bearbeitung",
+status_on_hold: "Pausiert",
+status_completed: "Abgeschlossen",
+status_cancelled: "Abgebrochen",
+
+
+
+approve_task: "Aufgabe genehmigen",
+reject_task: "Zurückweisen",
+awaiting_approval: "Genehmigung ausstehend",
+completion_summary: "Abschlussübersicht",
+technician_notes: "Techniker-Notizen",
+
+
+ /* ================= PROPERTIES KPIs ================= */
+  properties_total: "Gesamtobjekte",
+  properties_active: "Aktive Objekte",
+  properties_archived: "Archivierte Objekte",
+  properties_units: "Gesamteinheiten",
+
+  /* ================= PROPERTIES ================= */
+  properties: "Objekte",
+  properties_subtitle: "Verwalten Sie alle zugewiesenen Objekte",
+
+  /* ================= TABLE ================= */
+  col_propertyName: "Objektname",
+  col_type: "Typ",
+  col_floorsUnits: "Etagen / Einheiten",
+  col_facilityManager: "Facility Manager",
+  col_createdDate: "Erstellt am",
+
+  /* ================= ACTIONS ================= */
+  createProperty: "Objekt hinzufügen",
+
+  /* ================= TICKETS KPIs ================= */
+tickets_total: "Gesamttickets",
+tickets_open: "Offene Tickets",
+tickets_in_progress: "In Bearbeitung",
+tickets_overdue: "Überfällige Tickets",
+
+/* ================= TICKETS ================= */
+tickets: "Tickets",
+tickets_subtitle: "Verwalten Sie Tickets über alle Organisationen, Objekte und Techniker hinweg",
+
+createTicket: "Ticket erstellen",
+
+/* ================= AUFGABEN ================= */
+
+tasks: "Aufgaben",
+tasks_subtitle: "Verwalten Sie alle Wartungsaufgaben",
+
+create_task: "Aufgabe erstellen",
+
+/* KPIs */
+tasks_total: "Gesamtaufgaben",
+tasks_in_progress: "In Bearbeitung",
+tasks_completed: "Abgeschlossen",
+tasks_overdue: "Überfällig",
+
+/* Filters */
+filter_status: "Status",
+filter_priority: "Priorität",
+filter_technician: "Techniker",
+clear_all: "Alles zurücksetzen",
+
+/* Status */
+status_in_progress: "In Bearbeitung",
+status_completed: "Abgeschlossen",
+status_pending: "Ausstehend",
+status_on_hold: "Pausiert",
+status_cancelled: "Abgebrochen",
+
+/* Priority */
+priority_high: "Hoch",
+priority_medium: "Mittel",
+priority_low: "Niedrig",
+
+/* Table */
+col_task_id: "Aufgaben-ID",
+col_technician: "Techniker",
+col_status: "Status",
+col_actions: "Aktionen",
+
+/* Empty states */
+no_tasks: "Keine Aufgaben gefunden",
+
+
+task_create_title: "Aufgabe erstellen",
+task_edit_title: "Aufgabe bearbeiten",
+task_create_subtitle: "Aufgabendetails und Zuweisung definieren",
+
+task_section_context: "Aufgabenkontext",
+task_section_details: "Aufgabendetails",
+task_section_schedule: "Priorität & Planung",
+task_section_assignment: "Zuweisung",
+
+task_property: "Objekt",
+task_unit: "Einheit",
+task_title: "Aufgabentitel",
+task_description: "Beschreibung",
+task_due_date: "Fälligkeitsdatum",
+task_priority: "Priorität",
+task_assign_technician: "Techniker zuweisen",
+
+priority_high: "Hoch",
+priority_medium: "Mittel",
+priority_low: "Niedrig",
+
+select_technician: "Techniker auswählen",
+
+btn_create_task: "Aufgabe erstellen",
+btn_save_changes: "Änderungen speichern",
+btn_cancel: "Abbrechen",
+
+assign_task_title: "Aufgabe zuweisen",
+assign_task_subtitle: "Techniker auswählen und benachrichtigen",
+
+reassign_warning: "Diese Aufgabe ist aktuell zugewiesen an",
+task_context: "Aufgabenkontext",
+
+select_technician: "Techniker auswählen",
+search_technician: "Techniker suchen",
+
+active_tasks: "aktive Aufgaben",
+available: "Verfügbar",
+busy: "Ausgelastet",
+offline: "Offline",
+
+additional_note: "Zusätzliche Notiz",
+assign_note_placeholder: "Nachricht an den Techniker hinzufügen…",
+optional: "Optional",
+
+notify_technician: "Techniker benachrichtigen",
+notify_hint: "Benachrichtigung über die Zuweisung senden",
+
+btn_assign: "Zuweisen",
+btn_cancel: "Abbrechen",
+
+
+update_task_status_title: "Aufgabenstatus ändern",
+update_task_status_subtitle: "Aktuellen Status dieser Aufgabe anpassen",
+
+new_status: "Neuer Status",
+current_status: "Aktueller Status",
+
+status_todo: "Offen",
+status_in_progress: "In Bearbeitung",
+status_on_hold: "Pausiert",
+status_completed: "Abgeschlossen",
+status_cancelled: "Abgebrochen",
+
+reason_for_change: "Grund der Änderung",
+reason_placeholder: "Bitte Grund für die Statusänderung angeben…",
+reason_min_chars: "Mindestens 5 Zeichen erforderlich",
+
+notify_users: "Beteiligte benachrichtigen",
+notify_users_hint: "Techniker und Mieter über die Änderung informieren",
+
+btn_update_status: "Status aktualisieren",
+btn_cancel: "Abbrechen",
+
 
 
 
