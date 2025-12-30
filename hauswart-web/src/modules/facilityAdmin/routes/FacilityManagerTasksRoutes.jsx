@@ -1,13 +1,13 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import TasksList from "../pages/Tasks/TasksList";
-import TaskDetail from "../pages/Tasks/TaskDetail";
+import TasksList from "../pages/tasks/TasksList";
+import TaskDetail from "../pages/tasks/TaskDetail";
 
 /* ONLY EXISTING TABS */
-import Overview from "../pages/Tasks/tabs/Overview";
-import Activity from "../pages/Tasks/tabs/Activity";
-import Comments from "../pages/Tasks/tabs/Comments";
-import Approvals from "../pages/Tasks/tabs/Approvals";
+import Overview from "../pages/tasks/tabs/Overview";
+import Activity from "../pages/tasks/tabs/Activity";
+import Comments from "../pages/tasks/tabs/Comments";
+import Approvals from "../pages/tasks/tabs/Approvals";
 
 export default function FacilityManagerTasksRoutes() {
   return (

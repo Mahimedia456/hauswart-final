@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 
-import TechniciansList from "../pages/Technicians/TechniciansList";
-import TechnicianCreate from "../pages/Technicians/TechnicianCreate";
-import TechnicianDetail from "../pages/Technicians/TechnicianDetail";
-import TechnicianEdit from "../pages/Technicians/TechnicianEdit";
-import DeleteTechnician from "../pages/Technicians/DeleteTechnician";
+import TechniciansList from "../pages/technicians/TechniciansList";
+import TechnicianCreate from "../pages/technicians/TechnicianCreate";
+import TechnicianDetail from "../pages/technicians/TechnicianDetail";
+import TechnicianEdit from "../pages/technicians/TechnicianEdit";
+import DeleteTechnician from "../pages/technicians/DeleteTechnician";
 
-import TechnicianOverview from "../pages/Technicians/tabs/Overview";
-import TechnicianPerformance from "../pages/Technicians/tabs/Performance";
-import TechnicianAttendance from "../pages/Technicians/tabs/Attendance";
-import TechnicianTasks from "../pages/Technicians/tabs/Tasks";
-import TechnicianOffboarding from "../pages/Technicians/tabs/Offboarding";
+import TechnicianOverview from "../pages/technicians/tabs/Overview";
+import TechnicianPerformance from "../pages/technicians/tabs/Performance";
+import TechnicianAttendance from "../pages/technicians/tabs/Attendance";
+import TechnicianTasks from "../pages/technicians/tabs/Tasks";
+import TechnicianOffboarding from "../pages/technicians/tabs/Offboarding";
 
 export default function FacilityManagerTechniciansRoutes() {
   return (

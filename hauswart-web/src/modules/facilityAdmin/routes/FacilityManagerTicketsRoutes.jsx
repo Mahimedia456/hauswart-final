@@ -1,14 +1,14 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import TicketsList from "../pages/Tickets/TicketsList";
-import TicketCreate from "../pages/Tickets/TicketCreate";
-import TicketDetail from "../pages/Tickets/TicketDetail";
+import TicketsList from "../pages/tickets/TicketsList";
+import TicketCreate from "../pages/tickets/TicketCreate";
+import TicketDetail from "../pages/tickets/TicketDetail";
 
 /* TABS */
-import TicketOverview from "../pages/Tickets/tabs/Overview";
-import TicketDetails from "../pages/Tickets/tabs/Detail";
-import TicketChatHub from "../pages/Tickets/tabs/ChatHub";
-import TicketTasks from "../pages/Tickets/tabs/Tasks";
+import TicketOverview from "../pages/tickets/tabs/Overview";
+import TicketDetails from "../pages/tickets/tabs/Detail";
+import TicketChatHub from "../pages/tickets/tabs/ChatHub";
+import TicketTasks from "../pages/tickets/tabs/Tasks";
 
 export default function FacilityManagerTicketsRoutes() {
   return (

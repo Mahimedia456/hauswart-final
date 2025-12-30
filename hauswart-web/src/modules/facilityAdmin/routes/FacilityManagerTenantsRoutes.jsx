@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
-import TenantsList from "../pages/Tenants/TenantsList";
-import AddTenant from "../pages/Tenants/AddTenant";
-import TenantDetails from "../pages/Tenants/TenantDetails";
-import EditTenant from "../pages/Tenants/EditTenant";
+import TenantsList from "../pages/tenants/TenantsList";
+import AddTenant from "../pages/tenants/AddTenant";
+import TenantDetails from "../pages/tenants/TenantDetails";
+import EditTenant from "../pages/tenants/EditTenant";
 
-import TenantOverview from "../pages/Tenants/tabs/Overview";
-import TenantDetailsTab from "../pages/Tenants/tabs/Details";
-import TenantPropertyUnit from "../pages/Tenants/tabs/PropertyUnit";
-import TenantTickets from "../pages/Tenants/tabs/Tickets";
+import TenantOverview from "../pages/tenants/tabs/Overview";
+import TenantDetailsTab from "../pages/tenants/tabs/Details";
+import TenantPropertyUnit from "../pages/tenants/tabs/PropertyUnit";
+import TenantTickets from "../pages/tenants/tabs/Tickets";
 
 export default function FacilityManagerTenantsRoutes() {
   return (
