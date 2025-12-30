@@ -3732,10 +3732,109 @@ btn_update_status: "Update Status",
 btn_cancel: "Cancel",
 
 
+fm_profile_title: "My Profile",
+  fm_profile_subtitle: "Manage your personal information",
+  edit_profile: "Edit Profile",
+  change_password: "Change Password",
+  phone: "Phone",
+  location: "Location",
+  organization: "Organization",
+  timezone: "Timezone",
+  fm_settings: "Settings",
+  fm_settings_desc: "Manage your preferences and configuration",
 
+fm_edit_profile_title: "Edit Profile",
+profile_photo: "Profile Photo",
+change_photo: "Change Photo",
+remove: "Remove",
+photo_hint: "JPG or PNG • Max 5MB",
+basic_information: "Basic Information",
+email_locked: "Email cannot be changed",
+organization_role: "Organization & Role",
+org_role_info:
+  "Your role and organization details are managed centrally. Please contact your administrator for changes.",
+preferences: "Preferences",
+notifications_info:
+  "Notification preferences are managed separately.",
+manage_notifications: "Manage Notifications",
+unsaved_changes: "Unsaved changes",
+cancel: "Cancel",
+save_changes: "Save Changes",
 
+security_sessions: "Security & Sessions",
+monitoring_active: "Monitoring Active",
+monitoring_desc:
+  "We monitor your account 24/7 for unusual sign-in attempts.",
+password_management: "Password Management",
+password_desc:
+  "Ensure your account is using a strong password.",
+current_password: "Current Password",
+new_password: "New Password",
+confirm_password: "Confirm New Password",
+password_hint:
+  "Minimum 8 characters, 1 uppercase letter, 1 number, 1 symbol.",
+update_password: "Update Password",
+two_factor: "Two-Factor Authentication (2FA)",
+two_factor_desc:
+  "Add an extra layer of security to your account.",
+active_sessions: "Active Sessions",
+active_sessions_desc:
+  "Devices where you are currently logged in.",
+logout_all: "Log out of all sessions",
+login_activity: "Recent Login Activity",
+login_activity_desc:
+  "History of access to your account.",
+view_log: "View full activity log",
 
+notification_settings: "Notification Settings",
 
+global_preferences: "Global Preferences",
+global_preferences_desc:
+  "Manage your master notification settings and quiet hours logic.",
+
+enable_all_notifications: "Enable All Notifications",
+enable_all_notifications_desc:
+  "Turn off to mute all non-critical system alerts temporarily.",
+
+quiet_hours: "Quiet Hours",
+quiet_hours_desc:
+  "Only critical alerts will be delivered during this window.",
+
+from: "From",
+to: "To",
+
+task_notifications: "Task Notifications",
+task_notifications_desc:
+  "Updates regarding work orders, maintenance, and facility tasks.",
+
+task_new: "New task created",
+task_assigned: "Task assigned to technician",
+task_completed: "Task completed (approval required)",
+task_overdue: "Task overdue / SLA breached",
+
+approvals_critical: "Approvals & Critical Alerts",
+approvals_critical_desc:
+  "Safety protocols and operational emergencies.",
+
+emergency_task: "Emergency / high-priority task created",
+task_rejected: "Task rejection / rework required",
+tech_unavailable: "Technician marked unavailable during active task",
+
+tenant_notifications: "Tenant & Communication Notifications",
+tenant_notifications_desc:
+  "Alerts related to tenant requests, messages, and escalations.",
+
+tenant_issue: "New tenant issue reported",
+tenant_message: "Tenant message received",
+tenant_escalated: "Tenant issue escalated",
+manager_only: "Manager Only",
+
+delivery_summary: "Delivery Summary",
+delivery_summary_desc:
+  "In-App notifications are instant. Email notifications are batched every 15 minutes.",
+
+current_timezone: "Current Timezone",
+change: "Change",
 
 
 
@@ -7644,9 +7743,109 @@ notify_users_hint: "Techniker und Mieter über die Änderung informieren",
 btn_update_status: "Status aktualisieren",
 btn_cancel: "Abbrechen",
 
+  fm_profile_title: "Mein Profil",
+  fm_profile_subtitle: "Verwalten Sie Ihre persönlichen Daten",
+  edit_profile: "Profil bearbeiten",
+  change_password: "Passwort ändern",
+  phone: "Telefon",
+  location: "Standort",
+  organization: "Organisation",
+  timezone: "Zeitzone",
+  fm_settings: "Einstellungen",
+  fm_settings_desc: "Verwalten Sie Ihre Einstellungen und Konfiguration",
 
+fm_edit_profile_title: "Profil bearbeiten",
+profile_photo: "Profilfoto",
+change_photo: "Foto ändern",
+remove: "Entfernen",
+photo_hint: "JPG oder PNG • Max. 5 MB",
+basic_information: "Grundinformationen",
+email_locked: "E-Mail kann nicht geändert werden",
+organization_role: "Organisation & Rolle",
+org_role_info:
+  "Rollen- und Organisationsdaten werden zentral verwaltet. Bitte wenden Sie sich an den Administrator.",
+preferences: "Einstellungen",
+notifications_info:
+  "Benachrichtigungseinstellungen werden separat verwaltet.",
+manage_notifications: "Benachrichtigungen verwalten",
+unsaved_changes: "Ungespeicherte Änderungen",
+cancel: "Abbrechen",
+save_changes: "Änderungen speichern",
 
+security_sessions: "Sicherheit & Sitzungen",
+monitoring_active: "Überwachung aktiv",
+monitoring_desc:
+  "Ihr Konto wird rund um die Uhr überwacht.",
+password_management: "Passwortverwaltung",
+password_desc:
+  "Verwenden Sie ein starkes Passwort für maximale Sicherheit.",
+current_password: "Aktuelles Passwort",
+new_password: "Neues Passwort",
+confirm_password: "Passwort bestätigen",
+password_hint:
+  "Mindestens 8 Zeichen, 1 Großbuchstabe, 1 Zahl, 1 Sonderzeichen.",
+update_password: "Passwort aktualisieren",
+two_factor: "Zwei-Faktor-Authentifizierung (2FA)",
+two_factor_desc:
+  "Erhöhen Sie die Sicherheit Ihres Kontos.",
+active_sessions: "Aktive Sitzungen",
+active_sessions_desc:
+  "Geräte, auf denen Sie angemeldet sind.",
+logout_all: "Alle Sitzungen abmelden",
+login_activity: "Letzte Anmeldeaktivitäten",
+login_activity_desc:
+  "Verlauf der Kontoanmeldungen.",
+view_log: "Vollständiges Protokoll anzeigen",
 
+notification_settings: "Benachrichtigungseinstellungen",
+
+global_preferences: "Globale Einstellungen",
+global_preferences_desc:
+  "Verwalten Sie zentrale Benachrichtigungen und Ruhezeiten.",
+
+enable_all_notifications: "Alle Benachrichtigungen aktivieren",
+enable_all_notifications_desc:
+  "Deaktivieren, um nicht-kritische Hinweise vorübergehend stummzuschalten.",
+
+quiet_hours: "Ruhezeiten",
+quiet_hours_desc:
+  "Nur kritische Benachrichtigungen werden in diesem Zeitraum zugestellt.",
+
+from: "Von",
+to: "Bis",
+
+task_notifications: "Aufgabenbenachrichtigungen",
+task_notifications_desc:
+  "Aktualisierungen zu Wartungs- und Arbeitsaufträgen.",
+
+task_new: "Neue Aufgabe erstellt",
+task_assigned: "Aufgabe einem Techniker zugewiesen",
+task_completed: "Aufgabe abgeschlossen (Genehmigung erforderlich)",
+task_overdue: "Aufgabe überfällig / SLA verletzt",
+
+approvals_critical: "Genehmigungen & Kritische Warnungen",
+approvals_critical_desc:
+  "Sicherheits- und Notfallmeldungen.",
+
+emergency_task: "Notfall- / Hochprioritätsaufgabe erstellt",
+task_rejected: "Aufgabe abgelehnt / Nacharbeit erforderlich",
+tech_unavailable: "Techniker während aktiver Aufgabe nicht verfügbar",
+
+tenant_notifications: "Mieter- & Kommunikationsbenachrichtigungen",
+tenant_notifications_desc:
+  "Hinweise zu Mieteranfragen und Eskalationen.",
+
+tenant_issue: "Neues Mieterproblem gemeldet",
+tenant_message: "Nachricht vom Mieter erhalten",
+tenant_escalated: "Mieterproblem eskaliert",
+manager_only: "Nur Manager",
+
+delivery_summary: "Zustellübersicht",
+delivery_summary_desc:
+  "In-App-Benachrichtigungen erfolgen sofort. E-Mails werden alle 15 Minuten gebündelt.",
+
+current_timezone: "Aktuelle Zeitzone",
+change: "Ändern",
 
 
 

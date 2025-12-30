@@ -55,7 +55,24 @@ export default function FacilityManagerTopbar() {
         {/* 🔔 Notifications (GLOBAL, ROLE-AWARE) */}
         <TopbarNotifications />
 
-        {/* Language */}
+        {/* ⚙️ Settings */}
+        <button
+          onClick={() => navigate("/facility-manager/settings")}
+          className="
+            relative h-10 w-10
+            flex items-center justify-center
+            rounded-xl
+            bg-slate-100
+            hover:bg-slate-200
+          "
+          aria-label="Settings"
+        >
+          <span className="material-symbols-outlined text-[22px]">
+            settings
+          </span>
+        </button>
+
+        {/* Language Switch */}
         <div className="flex items-center rounded-xl bg-slate-100 border border-slate-200">
           <button
             onClick={() => setLang("EN")}
@@ -79,17 +96,24 @@ export default function FacilityManagerTopbar() {
           </button>
         </div>
 
-        {/* Profile */}
+        {/* 👤 Profile */}
         <button
           onClick={() => navigate("/facility-manager/profile")}
-          className="flex items-center gap-3 rounded-xl bg-slate-100 py-1.5 px-2 hover:bg-slate-200"
+          className="
+            flex items-center gap-3
+            rounded-xl
+            bg-slate-100
+            py-1.5 px-2
+            hover:bg-slate-200
+          "
+          aria-label="Profile"
         >
           <img
             src="https://i.pravatar.cc/100"
             className="h-9 w-9 rounded-full"
             alt="Profile"
           />
-          <div className="hidden md:block text-sm">
+          <div className="hidden md:block text-sm text-left">
             <p className="font-semibold text-slate-900">
               John Smith
             </p>
@@ -102,3 +126,4 @@ export default function FacilityManagerTopbar() {
     </header>
   );
 }
+  
