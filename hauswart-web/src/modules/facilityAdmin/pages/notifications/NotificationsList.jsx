@@ -1,7 +1,7 @@
 import { useNotifications } from "../hooks/useNotifications";
 
 export default function NotificationsList() {
-  const { notifications } = useNotifications();
+  const { notifications } = useNotifications("SUPER_ADMIN");
 
   return (
     <div className="space-y-4">

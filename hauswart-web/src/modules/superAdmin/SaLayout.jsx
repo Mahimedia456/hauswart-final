@@ -14,7 +14,7 @@ export default function SaLayout() {
         <SaTopbar />
 
         {/* Scrollable content */}
-        <div className="mt-[70px] h-[calc(100%-70px)] w-full overflow-y-auto bg-[#FAFAFA] dark:bg-slate-900/50 p-8">
+        <div className="mt-[20px] h-[calc(100%-70px)] w-full overflow-y-auto bg-[#FAFAFA] dark:bg-slate-900/50 p-8">
           <Outlet />
         </div>
       </main>

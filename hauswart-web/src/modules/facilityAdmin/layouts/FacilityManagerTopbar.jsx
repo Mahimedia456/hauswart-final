@@ -1,17 +1,13 @@
-import { useState } from "react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { t } from "../../../i18n/translations";
 import { useNavigate } from "react-router-dom";
 
-import NotificationDropdown from "@/modules/notifications/components/NotificationDropdown";
-import { mockNotifications } from "@/modules/notifications/data/mockNotifications";
+import TopbarNotifications from "@/modules/notifications/components/TopbarNotifications";
 
 export default function FacilityManagerTopbar() {
   const { lang, setLang } = useLanguage();
   const dict = t[lang];
   const navigate = useNavigate();
-
-  const [openNotifications, setOpenNotifications] = useState(false);
 
   return (
     <header
@@ -56,25 +52,8 @@ export default function FacilityManagerTopbar() {
           />
         </div>
 
-        {/* Notifications */}
-        <button
-          onClick={() => setOpenNotifications((v) => !v)}
-          className="relative h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200"
-        >
-          <span className="material-symbols-outlined text-[22px]">
-            notifications
-          </span>
-
-          {mockNotifications.some((n) => !n.read) && (
-            <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-[#F38B14]" />
-          )}
-        </button>
-
-        <NotificationDropdown
-          open={openNotifications}
-          onClose={() => setOpenNotifications(false)}
-          notifications={mockNotifications}
-        />
+        {/* 🔔 Notifications (GLOBAL, ROLE-AWARE) */}
+        <TopbarNotifications />
 
         {/* Language */}
         <div className="flex items-center rounded-xl bg-slate-100 border border-slate-200">

@@ -14,7 +14,7 @@ export default function FacilityManagerLayout() {
         <FacilityManagerTopbar />
 
         {/* Scrollable content */}
-        <div className="mt-[70px] h-[calc(100%-70px)] w-full overflow-y-auto bg-[#FAFAFA] p-8">
+        <div className="mt-[10px] h-[calc(100%-60px)] w-full overflow-y-auto bg-[#FAFAFA] p-8">
           <Outlet />
         </div>
       </main>

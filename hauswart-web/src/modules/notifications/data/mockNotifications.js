@@ -3,17 +3,21 @@ export const mockNotifications = [
   {
     id: 1,
     title: "New ticket assigned",
-    description: "Ticket #1245 has been assigned",
+    message: "Ticket #1245 has been assigned",
     time: "2 mins ago",
     read: false,
-    roles: ["SUPER_ADMIN"]
+    type: "TICKET_CREATED",
+    refId: "1245",
+    roles: ["SUPER_ADMIN", "FACILITY_MANAGER"],
   },
   {
     id: 2,
     title: "Tenant added",
-    description: "A new tenant was added",
+    message: "A new tenant was added",
     time: "1 hour ago",
     read: true,
-    roles: ["SUPER_ADMIN"]
-  }
+    type: "TENANT_ADDED",
+    refId: "77",
+    roles: ["SUPER_ADMIN"],
+  },
 ];

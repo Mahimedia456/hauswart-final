@@ -9,7 +9,7 @@ import FacilityManagerTechniciansRoutes from "./FacilityManagerTechniciansRoutes
 import FacilityManagerTenantsRoutes from "./FacilityManagerTenantsRoutes";
 import FacilityManagerTicketsRoutes from "./FacilityManagerTicketsRoutes";
 import FacilityManagerTasksRoutes from "./FacilityManagerTasksRoutes";
-
+import NotificationsList from "@/modules/notifications/pages/NotificationsList";
 
 export default function FacilityManagerRoutes() {
   return (
@@ -30,6 +30,7 @@ export default function FacilityManagerRoutes() {
   <Route path="tenants/*" element={<FacilityManagerTenantsRoutes />} />
 
   <Route path="*" element={<Navigate to="/facility-manager" replace />} />
+  <Route path="notifications" element={<NotificationsList />} />
 </Route>
 
     </Routes>

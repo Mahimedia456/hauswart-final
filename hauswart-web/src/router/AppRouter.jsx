@@ -81,6 +81,16 @@ import SuperAdminProfile from "../modules/superAdmin/pages/Profile/Profile";
 import PropertiesList from "@/modules/superAdmin/pages/Properties/PropertiesList";
 import PropertyCreate from "@/modules/superAdmin/pages/Properties/PropertyCreate";
 import PropertyDetails from "@/modules/superAdmin/pages/Properties/PropertyDetails";
+import SystemSettingsLayout from "@/modules/superAdmin/pages/SystemSettings/SystemSettingsLayout";
+import SystemSettings from "@/modules/superAdmin/pages/SystemSettings/SystemSettings";
+import GeneralSettings from "@/modules/superAdmin/pages/SystemSettings/GeneralSettings";
+import BrandingSettings from "@/modules/superAdmin/pages/SystemSettings/BrandingSettings";
+import EmailSMTPSettings from "@/modules/superAdmin/pages/SystemSettings/EmailSMTPSettings";
+import EmailTemplates from "@/modules/superAdmin/pages/SystemSettings/EmailTemplates";
+import LocalizationSettings from "@/modules/superAdmin/pages/SystemSettings/LocalizationSettings";
+import NotificationsLayout from "@/modules/superAdmin/pages/SystemSettings/NotificationsLayout";
+import PushNotificationSettings from "@/modules/superAdmin/pages/SystemSettings/PushNotificationSettings";
+
 import {
   PropOverview,
   PropDetailsTab,
@@ -140,6 +150,19 @@ export default function AppRouter() {
           }
         > 
 
+
+
+    {/* ✅ System Settings */}
+    <Route path="system-settings" element={<SystemSettingsLayout />}>
+      <Route index element={<SystemSettings />} />
+      <Route path="general" element={<GeneralSettings />} />
+      <Route path="branding" element={<BrandingSettings />} />
+      <Route path="email-smtp" element={<EmailSMTPSettings />} />
+      <Route path="email-templates" element={<EmailTemplates />} />
+      <Route path="localization" element={<LocalizationSettings />} />
+      <Route path="notifications" element={<NotificationsLayout />} />
+      <Route path="push-notifications" element={<PushNotificationSettings />} />
+    </Route>
       {/* FALLBACK */}
       <Route path="*" element={<Login />} />
           <Route index element={<SaDashboard />} />
@@ -239,6 +262,7 @@ export default function AppRouter() {
           </Route>
 
           <Route path="tenants/:id/edit" element={<EditTenant />} />
+
         </Route>
         <Route path="/facility-manager/*" element={<FacilityManagerRoutes />} />
       
