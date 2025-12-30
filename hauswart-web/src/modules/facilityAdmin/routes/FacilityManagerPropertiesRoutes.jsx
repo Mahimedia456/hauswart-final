@@ -15,7 +15,7 @@ import {
   PropStaff,
   PropGPSLogs,
   PropActivity,
-} from "../pages/Properties";
+} from "../pages/properties";
 
 export default function FacilityManagerPropertiesRoutes() {
   return (
