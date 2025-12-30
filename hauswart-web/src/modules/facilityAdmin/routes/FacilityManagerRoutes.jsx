@@ -20,7 +20,7 @@ import FacilityManagerEditProfile from "../pages/profile/FacilityManagerEditProf
 import FacilityManagerSecuritySessions from "../pages/profile/FacilityManagerSecuritySessions";
 import FacilityManagerNotificationSettings from "../pages/profile/FacilityManagerNotificationSettings";
 
-import FacilityManagerSettings from "../pages/Settings/FacilityManagerSettings";
+import FacilityManagerSettings from "../pages/settings/FacilityManagerSettings";
 
 export default function FacilityManagerRoutes() {
   return (
