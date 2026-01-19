@@ -1,16 +1,39 @@
 // src/modules/auth/pages/VerifyOTP.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../../config/api";
+
 
 export default function VerifyOTP() {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
+const [error, setError] = useState("");
 
-  const submit = (e) => {
-    e.preventDefault();
-    if (otp.length < 4) return;
+const submit = async (e) => {
+  e.preventDefault();
+
+  if (otp.length !== 6) {
+    return setError("Enter 6 digit OTP");
+  }
+
+  const email = sessionStorage.getItem("reset_email");
+  if (!email) {
+    return navigate("/auth/forgot-password");
+  }
+
+  try {
+    await api.post("/auth/verify-otp", {
+      email,
+      otp,
+    });
+
+    sessionStorage.setItem("reset_otp", otp);
     navigate("/auth/reset-password");
-  };
+  } catch (err) {
+    setError(err?.response?.data?.message || "Invalid OTP");
+  }
+};
+{error && <p className="text-red-500 text-sm">{error}</p>}
 
   return (
     <div className="

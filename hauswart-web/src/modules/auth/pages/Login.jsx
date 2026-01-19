@@ -3,6 +3,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../context/LanguageContext";
 import { t } from "../../../i18n/translations";
+import api from "../../../config/api";
 
 export default function Login() {
   const { login } = useAuth();
@@ -10,7 +11,7 @@ export default function Login() {
   const { lang } = useLanguage();
   const dict = t[lang];
 
-  // 🔹 ROLE TAB STATE
+  // 🔹 ROLE TAB STATE (UI ONLY)
   const [roleTab, setRoleTab] = useState("SUPER_ADMIN");
 
   // 🔹 FORM STATE
@@ -18,33 +19,38 @@ export default function Login() {
   const [password, setPassword] = useState("123123123");
   const [showPassword, setShowPassword] = useState(false);
 
-  const submit = (e) => {
-    e.preventDefault();
+ const submit = async (e) => {
+  e.preventDefault();
 
-    // ✅ SUPER ADMIN LOGIN
-    if (
-      roleTab === "SUPER_ADMIN" &&
-      email === "admin@mahimediasolutions.com" &&
-      password === "123123123"
-    ) {
-      login("dummy-token", "SUPER_ADMIN");
+  try {
+    // 🔐 API LOGIN
+    const res = await api.post("/auth/login", {
+      email,
+      password,
+    });
+
+    const { token, user } = res.data;
+
+    // Save auth
+    login(token, user.role);
+
+    // 🚦 ROLE-BASED REDIRECT
+    if (user.role === "SUPER_ADMIN") {
       navigate("/super-admin", { replace: true });
       return;
     }
 
-    // ✅ FACILITY MANAGER LOGIN
-    if (
-      roleTab === "FACILITY_MANAGER" &&
-      email === "facility@mahimediasolutions.com" &&
-      password === "123123123"
-    ) {
-      login("dummy-token", "FACILITY_MANAGER");
-navigate("/facility-manager", { replace: true });
-      return;
+    if (user.role === "FACILITY_ADMIN") {
+      navigate("/facility-manager", { replace: true });
+      return; // ✅ THIS WAS MISSING
     }
 
+    // fallback (should never happen)
     alert(dict.login_invalid);
-  };
+  } catch (err) {
+    alert(dict.login_invalid);
+  }
+};
 
   return (
     <div
@@ -70,11 +76,11 @@ navigate("/facility-manager", { replace: true });
         </span>
       </div>
 
-      {/* 🔹 ROLE TABS */}
+      {/* 🔹 ROLE TABS (UI ONLY – NO LOGIC CHANGE) */}
       <div className="mb-4 flex gap-2 bg-white/70 p-1 rounded-xl border border-white/40 backdrop-blur">
         {[
           { key: "SUPER_ADMIN", label: "Super Admin" },
-          { key: "FACILITY_MANAGER", label: "Facility Manager" },
+          { key: "FACILITY_ADMIN", label: "Facility Manager" },
         ].map((tab) => (
           <button
             key={tab.key}
@@ -87,7 +93,7 @@ navigate("/facility-manager", { replace: true });
                 setPassword("123123123");
               }
 
-              if (tab.key === "FACILITY_MANAGER") {
+              if (tab.key === "FACILITY_ADMIN") {
                 setEmail("facility@mahimediasolutions.com");
                 setPassword("123123123");
               }

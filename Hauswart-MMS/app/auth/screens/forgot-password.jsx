@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-
+import { useState } from "react";
+import api from "../../services/api";
 import ScreenWrapper from "../../shared/ScreenWrapper";
 import PrimaryButton from "../../shared/PrimaryButton";
 import { colors } from "../../constants/colors";
@@ -21,13 +22,30 @@ import useLanguage from "../../hooks/useLanguage";
 export default function ForgotPassword() {
   const { t } = useLanguage();
   const router = useRouter();
-
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const title = t?.forgotPassword?.title ?? "Forgot Password";
   const subtitle =
     t?.forgotPassword?.subtitle ??
     "Enter your email to receive a verification code.";
   const submit = t?.forgotPassword?.submit ?? "Send Code";
   const emailLabel = t?.login?.email ?? "Email / Username";
+
+  const handleSendOtp = async () => {
+  if (!email.includes("@")) return alert("Enter valid email");
+
+  try {
+    setLoading(true);
+    await api.post("/auth/forgot-password", { email });
+    global.resetEmail = email; // store temporarily
+    router.push("/verify-otp");
+  } catch (err) {
+    alert(err?.response?.data?.message || "Failed to send OTP");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <ScreenWrapper>
@@ -72,44 +90,47 @@ export default function ForgotPassword() {
 
           {/* SHEET */}
           <View style={styles.sheet}>
-            <View style={styles.card}>
-              <View style={styles.field}>
-                <Text style={styles.label}>{emailLabel}</Text>
+            <View style={styles.field}>
+              <View style={styles.card}>
+  <Text style={styles.label}>{emailLabel}</Text>
 
-                <View style={styles.inputWrap}>
-                  <Ionicons
-                    name="mail-outline"
-                    size={18}
-                    color={colors.textMuted}
-                  />
-                  <TextInput
-                    placeholder="name@example.com"
-                    placeholderTextColor={colors.textMuted}
-                    style={styles.input}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    returnKeyType="done"
-                  />
-                </View>
-              </View>
+  <View style={styles.inputWrap}>
+    <Ionicons
+      name="mail-outline"
+      size={18}
+      color={colors.textMuted}
+    />
+    <TextInput
+      value={email}
+      onChangeText={setEmail}
+      placeholder="name@example.com"
+      placeholderTextColor={colors.textMuted}
+      style={styles.input}
+      keyboardType="email-address"
+      autoCapitalize="none"
+      autoCorrect={false}
+    />
+  </View>
+</View>
 
-              <View style={{ marginTop: spacing.md }}>
-                <PrimaryButton
-                  title={submit}
-                  onPress={() => router.push("/verify-otp")}
-                />
-              </View>
+<View style={{ marginTop: spacing.md }}>
+  <PrimaryButton
+    title={submit}
+    loading={loading}
+    onPress={handleSendOtp}
+  />
+</View>
 
-              <Text style={styles.footerText}>
-                {t?.common?.backHint ?? "Remember your password?"}{" "}
-                <Text
-                  style={styles.footerLink}
-                  onPress={() => router.back()}
-                >
-                  {t?.common?.goBack ?? "Go back"}
-                </Text>
-              </Text>
+<Text style={styles.footerText}>
+  {t?.common?.backHint ?? "Remember your password?"}{" "}
+  <Text
+    style={styles.footerLink}
+    onPress={() => router.back()}
+  >
+    {t?.common?.goBack ?? "Go back"}
+  </Text>
+</Text>
+
             </View>
           </View>
 

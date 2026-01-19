@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../context/LanguageContext";
 import { t } from "../../../i18n/translations";
+import api from "../../../config/api";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -12,21 +13,52 @@ export default function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  // ⛔ UI ROLE KEPT BUT IGNORED
   const [role, setRole] = useState("Caretaker");
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [terms, setTerms] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    if (!terms) return setError("You must agree to the Terms & Privacy Policy.");
-    if (password !== confirmPassword)
+    if (!terms) {
+      return setError("You must agree to the Terms & Privacy Policy.");
+    }
+
+    if (password !== confirmPassword) {
       return setError("Passwords do not match.");
+    }
 
-    // Continue to OTP screen
-    navigate("/auth/verify-otp");
+    try {
+      setLoading(true);
+
+      // ✅ FORCE ROLE + SOURCE (SECURITY)
+      await api.post("/auth/register", {
+        fullName,
+        email,
+        phone,
+        password,
+        role: "FACILITY_ADMIN", // 🔒 HARD LOCK
+        source: "web",
+      });
+
+      // ✅ AFTER SUCCESS → LOGIN
+      navigate("/auth/login", { replace: true });
+
+    } catch (err) {
+      setError(
+        err?.response?.data?.message ||
+        "Registration failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -114,71 +146,45 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Role */}
-          <div>
+          {/* Role (UI ONLY – IGNORED) */}
+          {/* <div>
             <label className="block text-sm font-medium mb-2">Select Role</label>
-
-            <div className="relative">
-              <span className="material-symbols-outlined absolute left-3 top-3 text-slate-500">
-                badge
-              </span>
-
-              <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="
-                  w-full h-11 pl-12 pr-10 rounded-xl bg-white/80 border border-slate-300 
-                  outline-none focus:ring-2 focus:ring-[#F38B14]
-                "
-              >
-                <option>Caretaker</option>
-                <option>Facility Manager</option>
-                <option>Service Provider</option>
-                <option>Tenant</option>
-              </select>
-
-              <span className="material-symbols-outlined absolute right-3 top-3 text-slate-500">
-                expand_more
-              </span>
-            </div>
-          </div>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="w-full h-11 rounded-xl bg-white/80 border border-slate-300"
+            >
+              <option>Caretaker</option>
+              <option>Facility Manager</option>
+              <option>Service Provider</option>
+              <option>Tenant</option>
+            </select>
+          </div> */}
 
           {/* Password */}
           <div>
             <label className="block text-sm font-medium mb-2">Password</label>
-            <div className="flex items-center rounded-xl bg-white/80 border border-slate-300">
-              <span className="material-symbols-outlined px-3 text-slate-500">
-                lock
-              </span>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="flex-1 h-11 px-2 bg-transparent outline-none"
-                placeholder="••••••••"
-                required
-              />
-            </div>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full h-11 rounded-xl border border-slate-300 px-3"
+              required
+            />
           </div>
 
-          {/* Confirm Password */}
+          {/* Confirm */}
           <div>
             <label className="block text-sm font-medium mb-2">
               Confirm Password
             </label>
-            <div className="flex items-center rounded-xl bg-white/80 border border-slate-300">
-              <span className="material-symbols-outlined px-3 text-slate-500">
-                lock
-              </span>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="flex-1 h-11 px-2 bg-transparent outline-none"
-                placeholder="••••••••"
-                required
-              />
-            </div>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full h-11 rounded-xl border border-slate-300 px-3"
+              required
+            />
           </div>
 
           {/* Terms */}
@@ -187,11 +193,10 @@ export default function Register() {
               type="checkbox"
               checked={terms}
               onChange={(e) => setTerms(e.target.checked)}
-              className="h-4 w-4 rounded text-[#F38B14]"
             />
             <p className="text-sm">
               I agree to the{" "}
-              <span className="text-[#F38B14] underline cursor-pointer">
+              <span className="text-[#F38B14] underline">
                 Terms & Privacy Policy
               </span>
             </p>
@@ -203,12 +208,13 @@ export default function Register() {
           {/* CTA */}
           <button
             type="submit"
+            disabled={loading}
             className="
               w-full h-11 rounded-xl bg-[#F38B14] text-white font-semibold
-              hover:bg-black transition shadow-md shadow-orange-300/30
+              hover:bg-black transition
             "
           >
-            Create Account
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 

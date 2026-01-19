@@ -1,16 +1,44 @@
 // src/modules/auth/pages/ResetPassword.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../../config/api";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+const [error, setError] = useState("");
 
-  const submit = (e) => {
-    e.preventDefault();
-    if (password.length < 4) return;
+const submit = async (e) => {
+  e.preventDefault();
+
+  if (password.length < 8) {
+    return setError("Password must be at least 8 characters");
+  }
+
+  const email = sessionStorage.getItem("reset_email");
+  const otp = sessionStorage.getItem("reset_otp");
+
+  if (!email || !otp) {
+    return navigate("/auth/forgot-password");
+  }
+
+  try {
+    await api.post("/auth/reset-password", {
+      email,
+      otp,
+      newPassword: password,
+    });
+
+    sessionStorage.removeItem("reset_email");
+    sessionStorage.removeItem("reset_otp");
+
     navigate("/auth/login");
-  };
+  } catch (err) {
+    setError(err?.response?.data?.message || "Reset failed");
+  }
+};
+{error && <p className="text-red-500 text-sm">{error}</p>}
+
 
   return (
     <div className="

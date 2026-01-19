@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import api from "../../services/api";
 
 import ScreenWrapper from "../../shared/ScreenWrapper";
 import PrimaryButton from "../../shared/PrimaryButton";
@@ -29,6 +30,17 @@ export default function VerifyOtp() {
 
   const inputs = useRef([]);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+
+  // ✅ NEW
+  const [loading, setLoading] = useState(false);
+  const [seconds, setSeconds] = useState(60);
+
+  // ✅ NEW: countdown
+  useEffect(() => {
+    if (seconds <= 0) return;
+    const id = setInterval(() => setSeconds((s) => s - 1), 1000);
+    return () => clearInterval(id);
+  }, [seconds]);
 
   const setDigit = (index, value) => {
     const v = value?.replace(/[^0-9]/g, "").slice(-1) ?? "";
@@ -58,9 +70,60 @@ export default function VerifyOtp() {
     }
   };
 
-  const handleVerify = () => {
-    // TODO: verify API later
-    router.push("/reset-password");
+  const handleVerify = async () => {
+    const code = otp.join("");
+
+    if (code.length !== 6) {
+      alert("Enter 6 digit OTP");
+      return;
+    }
+
+    if (!global.resetEmail) {
+      alert("Session expired. Please request OTP again.");
+      router.replace("/forgot-password");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await api.post("/auth/verify-otp", {
+        email: global.resetEmail,
+        otp: code,
+      });
+
+      global.resetOtp = code;
+      router.push("/reset-password");
+    } catch (err) {
+      alert(err?.response?.data?.message || "Invalid OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ NEW: resend handler (UI unchanged, only logic)
+  const handleResend = async () => {
+    if (seconds > 0) return; // hard guard
+
+    if (!global.resetEmail) {
+      alert("Session expired. Please request OTP again.");
+      router.replace("/forgot-password");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await api.post("/auth/forgot-password", { email: global.resetEmail });
+
+      // restart timer
+      setSeconds(60);
+
+      alert("OTP resent successfully");
+    } catch (err) {
+      alert(err?.response?.data?.message || "Failed to resend OTP");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -125,10 +188,7 @@ export default function VerifyOtp() {
                     key={i}
                     ref={(el) => (inputs.current[i] = el)}
                     value={otp[i]}
-                    style={[
-                      styles.otpInput,
-                      otp[i] ? styles.otpFilled : null,
-                    ]}
+                    style={[styles.otpInput, otp[i] ? styles.otpFilled : null]}
                     keyboardType="number-pad"
                     maxLength={1}
                     onChangeText={(v) => setDigit(i, v)}
@@ -141,21 +201,26 @@ export default function VerifyOtp() {
               </View>
 
               <View style={{ marginTop: spacing.lg }}>
-                <PrimaryButton title={submit} onPress={handleVerify} />
+                <PrimaryButton
+                  title={submit}
+                  loading={loading}
+                  onPress={handleVerify}
+                />
               </View>
 
               <View style={styles.bottomRow}>
                 <Text style={styles.bottomText}>
                   {t?.verifyOtp?.noCode ?? "Didn’t receive a code?"}
+                  {seconds > 0 ? ` (${seconds}s)` : ""}
                 </Text>
 
                 <Pressable
-                  onPress={() => {
-                    // TODO: resend API later
-                  }}
+                  onPress={handleResend}
+                  disabled={seconds > 0 || loading}
                   style={({ pressed }) => [
                     styles.resendPill,
                     pressed && styles.pressedMini,
+                    (seconds > 0 || loading) && { opacity: 0.55 },
                   ]}
                 >
                   <Text style={styles.resendText}>

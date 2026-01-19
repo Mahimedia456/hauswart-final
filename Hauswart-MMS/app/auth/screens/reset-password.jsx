@@ -17,6 +17,8 @@ import PrimaryButton from "../../shared/PrimaryButton";
 import { colors } from "../../constants/colors";
 import { spacing } from "../../constants/spacing";
 import useLanguage from "../../hooks/useLanguage";
+import { useState } from "react";
+import api from "../../services/api";
 
 export default function ResetPassword() {
   const { t } = useLanguage();
@@ -33,6 +35,48 @@ export default function ResetPassword() {
     t?.register?.passwordHint ?? "Must contain at least 8 characters";
   const confirmLabel =
     t?.changePassword?.confirm ?? "Confirm New Password";
+
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleResetPassword = async () => {
+    if (!password || password.length < 8) {
+      alert("Password must be at least 8 characters");
+      return;
+    }
+
+    if (password !== confirm) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    if (!global.resetEmail || !global.resetOtp) {
+      alert("Session expired. Please restart password recovery.");
+      router.replace("/forgot-password");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await api.post("/auth/reset-password", {
+        email: global.resetEmail,
+        otp: global.resetOtp,
+        newPassword: password,
+      });
+
+      global.resetEmail = null;
+      global.resetOtp = null;
+
+      alert("Password reset successfully");
+      router.replace("/login");
+    } catch (err) {
+      alert(err?.response?.data?.message || "Failed to reset password");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <ScreenWrapper>
@@ -90,10 +134,10 @@ export default function ResetPassword() {
                   />
                   <TextInput
                     secureTextEntry
+                    value={password}
+                    onChangeText={setPassword}
                     placeholder="Enter new password"
-                    placeholderTextColor={colors.textMuted}
                     style={styles.input}
-                    returnKeyType="next"
                   />
                 </View>
 
@@ -112,18 +156,19 @@ export default function ResetPassword() {
                   />
                   <TextInput
                     secureTextEntry
+                    value={confirm}
+                    onChangeText={setConfirm}
                     placeholder="Re-enter new password"
-                    placeholderTextColor={colors.textMuted}
                     style={styles.input}
-                    returnKeyType="done"
                   />
-                </View>
+                </View> {/* ✅ FIX: this line was missing */}
               </View>
 
               <View style={{ marginTop: spacing.md }}>
                 <PrimaryButton
                   title={submit}
-                  onPress={() => router.replace("/login")}
+                  loading={loading}
+                  onPress={handleResetPassword}
                 />
               </View>
 
@@ -186,6 +231,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+
   iconBtn: {
     width: 42,
     height: 42,
@@ -206,6 +252,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.18)",
   },
+
   topPillText: {
     color: "#fff",
     fontWeight: "900",
@@ -218,6 +265,7 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     letterSpacing: 0.2,
   },
+
   heroSub: {
     marginTop: 8,
     color: "rgba(255,255,255,0.80)",
@@ -238,7 +286,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     padding: spacing.lg,
-
     shadowColor: "#000",
     shadowOpacity: 0.06,
     shadowRadius: 20,
@@ -293,6 +340,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: colors.textSecondary,
   },
+
   footerLink: {
     color: colors.primary,
     fontWeight: "900",

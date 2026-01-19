@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -17,11 +17,16 @@ import PrimaryButton from "../../shared/PrimaryButton";
 import { colors } from "../../constants/colors";
 import { spacing } from "../../constants/spacing";
 import useLanguage from "../../hooks/useLanguage";
+import api from "../../services/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
   const { t } = useLanguage();
   const router = useRouter();
   const { role } = useLocalSearchParams();
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [loading, setLoading] = useState(false);
 
   // ✅ fallbacks
   const title = t?.login?.title ?? "Welcome Back";
@@ -32,14 +37,58 @@ export default function Login() {
   const submit = t?.login?.submit ?? "Sign in";
   const noAccount = t?.login?.noAccount ?? "Don't have an account?";
   const register = t?.login?.register ?? "Get Started";
+const handleLogin = async () => {
+  console.log("LOGIN CLICKED");
+  console.log("EMAIL:", email);
+  console.log("PASSWORD:", password);
 
-  const handleLogin = () => {
-    if (role === "tenant") return router.replace("/tenant/home");
-    if (role === "facilityManager") return router.replace("/fm/dashboard");
-    if (role === "technician") return router.replace("/caretaker/dashboard");
-    if (role === "serviceProvider") return router.replace("/serviceProvider/dashboard");
-    router.replace("/tenant/home");
-  };
+  if (!email || !password) {
+    alert("Please enter email and password");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const res = await api.post("/auth/login", {
+      email,
+      password,
+    });
+
+    console.log("LOGIN RESPONSE:", res.data);
+
+    const { token, user } = res.data;
+
+    // ❌ BLOCK WEB-ONLY ROLES ON MOBILE
+    if (!["TENANT", "TECHNICIAN"].includes(user.role)) {
+      alert("This account is not allowed on mobile");
+      return;
+    }
+
+    // 💾 STORE AUTH
+    await AsyncStorage.setItem("hauswart_token", token);
+    await AsyncStorage.setItem("hauswart_role", user.role);
+
+    // 🚦 REDIRECT (CRITICAL)
+    if (user.role === "TENANT") {
+      console.log("REDIRECT → TENANT HOME");
+      router.replace("/tenant/home");
+      return;
+    }
+
+    if (user.role === "TECHNICIAN") {
+      console.log("REDIRECT → TECHNICIAN DASHBOARD");
+      router.replace("/caretaker/dashboard");
+      return;
+    }
+  } catch (err) {
+    console.log("LOGIN ERROR:", err?.response?.data || err.message);
+    alert(err?.response?.data?.message || "Invalid credentials");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <ScreenWrapper>
@@ -98,15 +147,17 @@ export default function Login() {
                 <Text style={styles.label}>{emailLabel}</Text>
                 <View style={styles.inputWrap}>
                   <Ionicons name="mail-outline" size={18} color={colors.textMuted} />
-                  <TextInput
-                    placeholder="user@company.com"
-                    placeholderTextColor={colors.textMuted}
-                    style={styles.input}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    returnKeyType="next"
-                  />
+              <TextInput
+  value={email}
+  onChangeText={setEmail}
+  placeholder="user@company.com"
+  placeholderTextColor={colors.textMuted}
+  style={styles.input}
+  keyboardType="email-address"
+  autoCapitalize="none"
+  autoCorrect={false}
+  returnKeyType="next"
+/>
                 </View>
               </View>
 
@@ -115,20 +166,22 @@ export default function Login() {
                 <Text style={styles.label}>{passLabel}</Text>
                 <View style={styles.inputWrap}>
                   <Ionicons name="key-outline" size={18} color={colors.textMuted} />
-                  <TextInput
-                    placeholder="••••••••"
-                    placeholderTextColor={colors.textMuted}
-                    secureTextEntry
-                    style={styles.input}
-                    returnKeyType="done"
-                  />
+ <TextInput
+  value={password}
+  onChangeText={setPassword}
+  placeholder="••••••••"
+  placeholderTextColor={colors.textMuted}
+  secureTextEntry
+  style={styles.input}
+  returnKeyType="done"
+/>
                 </View>
               </View>
 
               {/* CTA (Jobsly like wide button) */}
-              <View style={{ marginTop: spacing.sm }}>
-                <PrimaryButton title={submit} onPress={handleLogin} />
-              </View>
+      <View style={{ marginTop: spacing.sm }}>
+  <PrimaryButton title={submit} onPress={handleLogin} loading={loading} />
+</View>
 
               {/* Forgot */}
               <Pressable

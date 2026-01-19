@@ -3,21 +3,40 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../context/LanguageContext";
 import { t } from "../../../i18n/translations";
+import api from "../../../config/api";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const { lang } = useLanguage();
   const dict = t[lang];
+const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
-  const submit = (e) => {
-    e.preventDefault();
-    if (!email.includes("@")) return setError(dict.forgot_invalidEmail);
+const submit = async (e) => {
+  e.preventDefault();
+
+  if (!email.includes("@")) {
+    return setError(dict.forgot_invalidEmail);
+  }
+
+  try {
+    setLoading(true);
     setError("");
+
+    await api.post("/auth/forgot-password", { email });
+
+    // store email for next step
+    sessionStorage.setItem("reset_email", email);
+
     navigate("/auth/verify-otp");
-  };
+  } catch (err) {
+    setError(err?.response?.data?.message || "Failed to send OTP");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="w-full max-w-md p-10 rounded-2xl 

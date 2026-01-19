@@ -27,7 +27,7 @@ export default function FacilityManagerRoutes() {
     <Routes>
       <Route
         element={
-          <ProtectedRoute allowedRoles={["FACILITY_MANAGER"]}>
+          <ProtectedRoute allowedRoles={["FACILITY_ADMIN"]}>
             <FacilityManagerLayout />
           </ProtectedRoute>
         }

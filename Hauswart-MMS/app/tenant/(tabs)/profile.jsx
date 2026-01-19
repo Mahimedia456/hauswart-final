@@ -7,6 +7,8 @@ import ScreenWrapper from "@/shared/ScreenWrapper";
 import useLanguage from "@/hooks/useLanguage";
 import { colors } from "@/constants/colors";
 import { spacing } from "@/constants/spacing";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 /* ---------------------------------- */
 /* Reusable UI Helpers                */
@@ -48,6 +50,19 @@ function Item({ label, icon, onPress, isLast }) {
 export default function Profile() {
   const router = useRouter();
   const { t } = useLanguage();
+    const handleLogout = async () => {
+  try {
+    await AsyncStorage.multiRemove([
+      "hauswart_token",
+      "hauswart_role",
+    ]);
+
+    router.replace("/login");
+  } catch (err) {
+    console.log("TENANT LOGOUT ERROR:", err);
+  }
+};
+
 
   return (
     <ScreenWrapper>
@@ -123,10 +138,10 @@ onPress={() => router.push("/tenant/profile/emergency-contact")}
 
         {/* LOGOUT (always visible with padding) */}
         <View style={styles.logoutCard}>
-          <Pressable
-            onPress={() => router.replace("/login")}
-            style={({ pressed }) => [styles.logoutBtn, pressed && styles.pressed]}
-          >
+        <Pressable
+  onPress={handleLogout}
+  style={({ pressed }) => [styles.logoutBtn, pressed && styles.pressed]}
+>
             <View style={styles.logoutLeft}>
               <View style={styles.logoutIconWrap}>
                 <Ionicons name="log-out-outline" size={18} color={colors.error} />

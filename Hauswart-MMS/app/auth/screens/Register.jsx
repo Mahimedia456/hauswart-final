@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -11,6 +10,9 @@ import {
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import api from "../../services/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import ScreenWrapper from "../../shared/ScreenWrapper";
 import PrimaryButton from "../../shared/PrimaryButton";
@@ -23,6 +25,74 @@ export default function Register() {
   const router = useRouter();
   const { role = "tenant" } = useLocalSearchParams();
   const isTenant = role === "tenant";
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [unitCode, setUnitCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const handleRegister = async () => {
+  console.log("REGISTER CLICKED");
+
+  if (!fullName || !email || !phone || !password) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  if (password.length < 8) {
+    alert("Password must be at least 8 characters");
+    return;
+  }
+
+  if (role === "tenant" && !unitCode) {
+    alert("Unit code is required for tenants");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+   const res = await api.post("/auth/register", {
+  fullName: fullName,                     // ✅ REQUIRED
+  email,
+  phone,
+  password,
+  role: role.toUpperCase(),               // TENANT / TECHNICIAN
+  source: "mobile",                       // ✅ REQUIRED
+  propertyCode: role === "tenant" ? unitCode : null, // ✅ REQUIRED
+});
+
+
+    console.log("REGISTER RESPONSE:", res.data);
+
+   const { user } = res.data;
+
+// 🔐 AUTO LOGIN AFTER REGISTER
+const loginRes = await api.post("/auth/login", {
+  email,
+  password,
+});
+
+const { token } = loginRes.data;
+
+await AsyncStorage.setItem("hauswart_token", token);
+await AsyncStorage.setItem("hauswart_role", user.role);
+
+// 🔁 Redirect
+if (user.role === "TENANT") {
+  router.replace("/tenant/home");
+}
+
+if (user.role === "TECHNICIAN") {
+  router.replace("/caretaker/dashboard");
+}
+  } catch (err) {
+    console.log("REGISTER ERROR:", err?.response?.data || err.message);
+    alert(err?.response?.data?.message || "Registration failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   // ✅ fallbacks
   const title = t?.register?.title ?? "Create Account";
@@ -87,50 +157,69 @@ export default function Register() {
           <View style={styles.sheet}>
             <View style={styles.card}>
               {/* Fields inside card -> scroll feel, not full screen */}
-              <Field
-                label={nameLabel}
-                placeholder="Jane Doe"
-                icon="person-outline"
-              />
+            <Field
+            label={nameLabel}
+            placeholder="Jane Doe"
+            icon="person-outline"
+            value={fullName}
+            onChangeText={setFullName}
+          />
 
               <Field
-                label={emailLabel}
-                placeholder="jane@example.com"
-                icon="mail-outline"
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
+            label={emailLabel}
+            placeholder="jane@example.com"
+            icon="mail-outline"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={setEmail}
+          />
+
 
               <Field
-                label={phoneLabel}
-                placeholder="(555) 000-0000"
-                icon="call-outline"
-                keyboardType="phone-pad"
-              />
+            label={phoneLabel}
+            placeholder="(555) 000-0000"
+            icon="call-outline"
+            keyboardType="phone-pad"
+            value={phone}
+            onChangeText={setPhone}
+          />
+
 
               <Field
-                label={passLabel}
-                placeholder="Min. 8 characters"
-                icon="lock-closed-outline"
-                secure
-                helper={passHint}
-              />
+            label={passLabel}
+            placeholder="Min. 8 characters"
+            icon="lock-closed-outline"
+            secure
+            helper={passHint}
+            value={password}
+            onChangeText={setPassword}
+          />
 
-              {isTenant && (
-                <>
-                  <View style={styles.divider} />
-                  <Field
-                    label={propertyLabel}
-                    placeholder="BLDG-101"
-                    icon="home-outline"
-                    helper={propertyHint}
-                  />
-                </>
-              )}
 
-              <View style={{ marginTop: spacing.md }}>
-                <PrimaryButton title={submit} onPress={() => {}} />
-              </View>
+           {isTenant && (
+  <>
+            <View style={styles.divider} />
+            <Field
+              label={propertyLabel}
+              placeholder="BLDG-101"
+              icon="home-outline"
+              helper={propertyHint}
+              value={unitCode}
+              onChangeText={setUnitCode}
+            />
+          </>
+        )}
+
+
+         <View style={{ marginTop: spacing.md }}>
+  <PrimaryButton
+    title={submit}
+    onPress={handleRegister}
+    loading={loading}
+  />
+</View>
+
 
               <Text style={styles.footerText}>
                 {t?.login?.title ? "" : ""}{" "}
@@ -159,6 +248,8 @@ function Field({
   icon,
   keyboardType,
   autoCapitalize,
+  value,
+  onChangeText,
 }) {
   return (
     <View style={styles.field}>
@@ -167,14 +258,17 @@ function Field({
       <View style={styles.inputWrap}>
         <Ionicons name={icon} size={18} color={colors.textMuted} />
         <TextInput
-          placeholder={placeholder}
-          placeholderTextColor={colors.textMuted}
-          secureTextEntry={secure}
-          style={styles.input}
-          keyboardType={keyboardType}
-          autoCapitalize={autoCapitalize}
-          autoCorrect={false}
-        />
+  value={value}
+  onChangeText={onChangeText}
+  placeholder={placeholder}
+  placeholderTextColor={colors.textMuted}
+  secureTextEntry={secure}
+  style={styles.input}
+  keyboardType={keyboardType}
+  autoCapitalize={autoCapitalize}
+  autoCorrect={false}
+/>
+
       </View>
 
       {helper ? <Text style={styles.helper}>{helper}</Text> : null}

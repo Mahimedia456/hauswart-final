@@ -7,7 +7,7 @@ import ScreenWrapper from "@/shared/ScreenWrapper";
 import useLanguage from "@/hooks/useLanguage";
 import { colors } from "@/constants/colors";
 import { spacing } from "@/constants/spacing";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 /* ---------------- Helpers ---------------- */
 
 function Section({ title, children }) {
@@ -18,6 +18,7 @@ function Section({ title, children }) {
     </View>
   );
 }
+
 
 function Item({ label, icon, value, onPress, isLast }) {
   return (
@@ -50,6 +51,20 @@ function Item({ label, icon, value, onPress, isLast }) {
 export default function CaretakerProfile() {
   const router = useRouter();
   const { t } = useLanguage();
+  const handleLogout = async () => {
+  try {
+    // 🔴 TERMINATE SESSION
+    await AsyncStorage.multiRemove([
+      "hauswart_token",
+      "hauswart_role",
+    ]);
+
+    // 🔁 RESET NAVIGATION
+    router.replace("/login");
+  } catch (err) {
+    console.log("LOGOUT ERROR:", err);
+  }
+};
 
   // ✅ SAFE FALLBACK (fixes missing language issue)
   const cp = t?.caretakerProfile ?? {};
@@ -156,10 +171,11 @@ export default function CaretakerProfile() {
 
         {/* LOGOUT */}
         <View style={styles.logoutWrap}>
-          <Pressable
-            onPress={() => router.replace("/login")}
-            style={({ pressed }) => [styles.logoutBtn, pressed && styles.pressed]}
-          >
+        <Pressable
+  onPress={handleLogout}
+  style={({ pressed }) => [styles.logoutBtn, pressed && styles.pressed]}
+>
+
             <View style={styles.logoutLeft}>
               <View style={styles.logoutIcon}>
                 <Ionicons name="log-out-outline" size={18} color={colors.error} />

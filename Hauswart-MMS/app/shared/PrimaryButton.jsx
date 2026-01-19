@@ -1,40 +1,37 @@
-import { Pressable, Text, StyleSheet } from "react-native";
+import { Pressable, Text, ActivityIndicator, StyleSheet } from "react-native";
 import { colors } from "../constants/colors";
-import { radius } from "../constants/radius";
-import { spacing } from "../constants/spacing";
-import { typography } from "../constants/typography";
 
-export default function PrimaryButton({ title, onPress, disabled }) {
+export default function PrimaryButton({ title, onPress, loading }) {
   return (
     <Pressable
       onPress={onPress}
-      disabled={disabled}
+      disabled={loading}
       style={({ pressed }) => [
-        styles.button,
-        pressed && styles.active,
-        disabled && styles.disabled,
+        styles.btn,
+        pressed && { opacity: 0.9 },
+        loading && { opacity: 0.7 },
       ]}
     >
-      <Text style={styles.text}>{title}</Text>
+      {loading ? (
+        <ActivityIndicator color="#fff" />
+      ) : (
+        <Text style={styles.text}>{title}</Text>
+      )}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
+  btn: {
+    height: 52,
+    borderRadius: 16,
     backgroundColor: colors.primary,
-    paddingVertical: spacing.md,
-    borderRadius: radius.md,
     alignItems: "center",
-  },
-  active: {
-    backgroundColor: colors.primaryActive,
-  },
-  disabled: {
-    opacity: 0.5,
+    justifyContent: "center",
   },
   text: {
-    color: colors.white,
-    fontWeight: typography.button.fontWeight,
+    color: "#fff",
+    fontWeight: "900",
+    fontSize: 15,
   },
 });
