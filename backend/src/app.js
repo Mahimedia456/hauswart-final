@@ -7,42 +7,25 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.FRONTEND_URL, // set on Vercel backend
-].filter(Boolean);
+  "https://hauswart-final.vercel.app", // ✅ your frontend
+];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow Postman/curl
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error(`CORS blocked for origin: ${origin}`));
-    },
-    credentials: true,
+    origin: allowedOrigins,
+    credentials: false, // ✅ keep false since you use JWT in headers (Bearer token)
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// ❌ REMOVE THIS if you had it:
-// app.options("*", cors());
+// ✅ IMPORTANT: handle preflight for all routes (Express 5 safe)
+app.options(/.*/, cors({ origin: allowedOrigins }));
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ status: "ok", service: "Hauswart API" });
-});
-
-app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
-});
-
-app.get("/health/db", async (req, res) => {
-  res.json({ status: "ok", db: "connected" });
-});
+app.get("/", (req, res) => res.json({ status: "ok", service: "Hauswart API" }));
+app.get("/health", (req, res) => res.json({ status: "ok" }));
 
 app.use("/api/auth", authRoutes);
 
